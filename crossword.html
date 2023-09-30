@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Solver</title>
+    <link rel="stylesheet" href="sudoku.css">
+</head>
+<body>
+    <style>
+        /* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Light gray background */
+}
+
+header {
+    background-color: #460096; /* Teal color theme */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+}
+
+.nav-item {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.nav-item.active {
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 90px);
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+}
+
+.upload-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#image-upload {
+    display: none;
+}
+
+#crop-button {
+    background-color: #460096;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.puzzle-solution {
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #460096;
+    color: #fff;
+}
+
+    </style>
+    <header>
+        <h1>Sudoku Solver</h1>
+        <nav>
+            <ul>
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item active">Sudoku</li>
+                <li class="nav-item"><a href="crossword.html">Crossword</a></li>
+                <li class="nav-item"><a href="wordpuzzle.html">Word Puzzle</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="container">
+            <div class="upload-section">
+                <input type="file" id="image-upload" accept="image/*">
+                <button id="crop-button">Crop Image</button>
+            </div>
+            <div class="puzzle-solution">
+            </div>
+        </section>
+    </main>
+    <footer>
+        &copy; 2023 Sudoku Solver
+    </footer>
+    <script src="sudoku.js"></script>
+</body>
+</html>

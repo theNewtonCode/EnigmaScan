@@ -1,0 +1,77 @@
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+}
+
+.nav-item {
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.nav-item.active {
+    font-weight: bold;
+}
+
+main {
+    padding: 20px;
+}
+
+.hero {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.hero h2 {
+    font-size: 24px;
+}
+
+.hero p {
+    font-size: 16px;
+    margin: 20px 0;
+}
+
+.hero img {
+    max-width: 100%;
+    height: auto;
+}
+
+.puzzle-buttons {
+    text-align: center;
+    margin: 40px 0;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 0 20px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+}
