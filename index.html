@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Puzzle Solver</h1>
+        <h1>EnigmaScan Puzzle Pallette</h1>
         <nav>
             <ul>
                 <li class="nav-item active">Home</li>
@@ -33,6 +33,29 @@
     <footer>
         &copy; 2023 Puzzle Solver Web App
     </footer>
+
+        <script>
+            // Get references to the buttons
+            const sudokuButton = document.getElementById('sudoku-button');
+            const crosswordButton = document.getElementById('crossword-button');
+            const wordPuzzleButton = document.getElementById('word-puzzle-button');
+        
+            // Add click event listeners to each button
+            sudokuButton.addEventListener('click', function () {
+                // Redirect to the Sudoku page
+                window.location.href = 'sudoku.html';
+            });
+        
+            crosswordButton.addEventListener('click', function () {
+                // Redirect to the Crossword page
+                window.location.href = 'crossword.html';
+            });
+        
+            wordPuzzleButton.addEventListener('click', function () {
+                // Redirect to the Word Puzzle page
+                window.location.href = 'wordpuzzle.html';
+            });
+        </script>
     <script src="script.js"></script>
 </body>
 </html>

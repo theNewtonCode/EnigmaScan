@@ -9,26 +9,48 @@ body {
     background-color: #f0f0f0;
 }
 
+/* Header styles */
 header {
-    background-color: #333;
+    background: linear-gradient(90deg, #460096 0%, #009688 100%); /* Gradient background */
     color: #fff;
-    padding: 20px;
+    padding: 20px 0; /* Added top and bottom padding for spacing */
     text-align: center;
+    border-bottom: 2px solid #fff; /* Add a white border at the bottom */
 }
 
+/* Navigation styles */
 nav ul {
     list-style: none;
+    margin-top: 10px; /* Add spacing between the header and navigation */
 }
 
 .nav-item {
     display: inline-block;
     margin-right: 20px;
-    cursor: pointer;
 }
 
 .nav-item.active {
     font-weight: bold;
 }
+
+/* Link styles */
+.nav-item a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.nav-item a:hover {
+    color: #ffc107; /* Change color on hover */
+}
+
+/* Header title styles */
+h1 {
+    font-size: 28px; /* Increase the font size for the header title */
+    margin-bottom: 10px; /* Add spacing between the title and navigation */
+}
+
 
 main {
     padding: 20px;
