@@ -20,14 +20,30 @@
     </header>
     <main>
         <section class="hero" id="intro">
-            <h2>Welcome to the Puzzle Solver App</h2>
-            <p>Solve puzzles with ease using our app. Upload an image, choose your puzzle type, and get solutions in seconds!</p>
-            <img src="{{url_for('static', filename='img/puzzle_image.jpg')}}" alt="Puzzle Example">
+            <div class="introd">
+                <h2>EnigmaScan</h2>
+                <p>Solve puzzles with ease using our app. Upload an image, choose your puzzle type, and get solutions in seconds!</p>
+            </div>
         </section>
         <section class="puzzle-buttons" id="puzzlesbtn">
-            <button id="sudoku-button">Sudoku</button>
-            <button id="crossword-button">Crossword</button>
-            <button id="word-puzzle-button">Word Puzzle</button>
+            <div class="puzzle-card">
+                <h2>Sudoku</h2>
+                <img src="{{ url_for('static', filename='imgs/sudko.jpeg') }}">
+                <p>Solve classic Sudoku puzzles and test your logic skills.</p>
+                <button id="sudoku-button">Solve Sudoku</button>
+            </div>
+            <div class="puzzle-card">
+                <h2>Crossword</h2>
+                <img src="{{ url_for('static', filename='imgs/crossw.jpg') }}">
+                <p>Crosswords challenge your vocabulary and knowledge.</p>
+                <button id="crossword-button">Solve Crossword</button>
+            </div>
+            <div class="puzzle-card">
+                <h2>Word Puzzle</h2>
+                <img src="{{ url_for('static', filename='imgs/words.jpg') }}">
+                <p>Word Puzzle develop your strategical thinking.</p>
+                <button id="word-puzzle-button">Solve Word Puzzle</button>
+            </div>
         </section>
     </main>
     <footer>

@@ -50,12 +50,27 @@ h1 {
     margin-bottom: 10px;
 }
 
+.introd {
+    margin-top: 200px;
+    padding: 10px 30px 50px 30px;
+    background-color: #00000070;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.introd h2 {
+    font-size: 80px; /* Increase the font size even more */
+    font-weight: bold; /* Make it bold */
+    background: linear-gradient(90deg, #fbfbfb 56%, #460096 44%); /* Split colors evenly */
+    -webkit-background-clip: text; /* Clip the background to the text */
+    -webkit-text-fill-color: transparent; /* Make the text transparent */
+}
+
 /* Hero section styles */
 #intro {
     height: 100vh;
     background: url('./imgs/istockphoto-1271369710-1024x1024.jpg') center/cover no-repeat;
     display: flex;
-    justify-content: center;
     align-items: center;
     color: #fff;
     flex-direction: column;
@@ -68,26 +83,103 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fff;
-    color: #e74c3c;
+    background: url('./imgs/pexels-ds-stories-9227482.jpg') center/cover no-repeat;
+    color: #ffffff;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 /* Puzzle buttons styles */
 .puzzle-buttons {
+    display: flex;
+    justify-content: space-around;
     text-align: center;
     margin: 40px 0;
+    
+}
+.puzzle-card img {
+    margin-top: 10px;
+    width: 27vw;
+    height: 40vh;
+    margin-bottom: 10px;
+    border-radius: 10px;
 }
 
-button {
-    background-color: #333;
-    color: #fff;
+/* Adjust card styling as needed */
+.puzzle-card {
+    background-color: #1f1f1fa7;
+    /* border: 3px solid #ddd; */
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+}
+
+
+.puzzle-card h2 {
+    font-size: 34px;
+}
+
+.puzzle-card p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* button {
+
+    background: linear-gradient(90deg, #ffae00 0%, #ff00d6 100%); Gradient color 
+            -webkit-background-clip: text; /* Clip the background to the text 
+            -webkit-text-fill-color: transparent;
+
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    margin: 0 20px; /* Adjust margin to create space between buttons */
     font-size: 18px;
     border-radius: 5px;
-}
+} 
+*/
+
+    button {
+      align-self: center;
+      margin-top: 10px;
+      background-color: #fff;
+      background-image: none;
+      background-position: 0 90%;
+      background-repeat: repeat no-repeat;
+      background-size: 4px 3px;
+      border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+      border-style: solid;
+      border-width: 2px;
+      box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+      box-sizing: border-box;
+      color: #41403e;
+      cursor: pointer;
+      display: inline-block;
+      font-family: Neucha, sans-serif;
+      font-size: 1rem;
+      line-height: 23px;
+      outline: none;
+      padding: .75rem;
+      text-decoration: none;
+      transition: all 235ms ease-in-out;
+      border-bottom-left-radius: 15px 255px;
+      border-bottom-right-radius: 225px 15px;
+      border-top-left-radius: 255px 15px;
+      border-top-right-radius: 15px 225px;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+    
+    button:hover {
+      box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+      transform: translate3d(0, 2px, 0);
+    }
+    
+    button:focus {
+      box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+    }
+
 
 footer {
     text-align: center;
