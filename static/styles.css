@@ -11,17 +11,17 @@ body {
 
 /* Header styles */
 header {
-    background: linear-gradient(90deg, #460096 0%, #009688 100%); /* Gradient background */
+    background: linear-gradient(90deg, #460096 0%, #009688 100%);
     color: #fff;
-    padding: 20px 0; /* Added top and bottom padding for spacing */
+    padding: 20px 0;
     text-align: center;
-    border-bottom: 2px solid #fff; /* Add a white border at the bottom */
+    border-bottom: 2px solid #fff;
 }
 
 /* Navigation styles */
 nav ul {
     list-style: none;
-    margin-top: 10px; /* Add spacing between the header and navigation */
+    margin-top: 10px;
 }
 
 .nav-item {
@@ -33,48 +33,46 @@ nav ul {
     font-weight: bold;
 }
 
-/* Link styles */
 .nav-item a {
     text-decoration: none;
     color: #fff;
     font-size: 16px;
-    transition: color 0.3s ease; /* Smooth color transition on hover */
+    transition: color 0.3s ease;
 }
 
 .nav-item a:hover {
-    color: #ffc107; /* Change color on hover */
+    color: #ffc107;
 }
 
 /* Header title styles */
 h1 {
-    font-size: 28px; /* Increase the font size for the header title */
-    margin-bottom: 10px; /* Add spacing between the title and navigation */
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
-
-main {
-    padding: 20px;
-}
-
-.hero {
+/* Hero section styles */
+#intro {
+    height: 100vh;
+    background: url('./imgs/istockphoto-1271369710-1024x1024.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    flex-direction: column;
     text-align: center;
-    margin: 40px 0;
 }
 
-.hero h2 {
-    font-size: 24px;
+/* Main content section styles */
+#puzzlesbtn {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    color: #e74c3c;
 }
 
-.hero p {
-    font-size: 16px;
-    margin: 20px 0;
-}
-
-.hero img {
-    max-width: 100%;
-    height: auto;
-}
-
+/* Puzzle buttons styles */
 .puzzle-buttons {
     text-align: center;
     margin: 40px 0;
@@ -86,7 +84,7 @@ button {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    margin: 0 20px;
+    margin: 0 20px; /* Adjust margin to create space between buttons */
     font-size: 18px;
     border-radius: 5px;
 }

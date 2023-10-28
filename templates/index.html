@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnigmaScan 2023</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <header>
+        <h1>EnigmaScan: Your Puzzle Pallette</h1>
+        <nav>
+            <ul>
+                <li class="nav-item active">Home</li>
+                <li class="nav-item"><a href="{{url_for('sudoku')}}">Sudoku</a></li>
+                <li class="nav-item"><a href="{{url_for('crossword')}}">Crossword</a></li>
+                <li class="nav-item"><a href="{{url_for('wordpuzzle')}}">Word Puzzle</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero" id="intro">
+            <h2>Welcome to the Puzzle Solver App</h2>
+            <p>Solve puzzles with ease using our app. Upload an image, choose your puzzle type, and get solutions in seconds!</p>
+            <img src="{{url_for('static', filename='img/puzzle_image.jpg')}}" alt="Puzzle Example">
+        </section>
+        <section class="puzzle-buttons" id="puzzlesbtn">
+            <button id="sudoku-button">Sudoku</button>
+            <button id="crossword-button">Crossword</button>
+            <button id="word-puzzle-button">Word Puzzle</button>
+        </section>
+    </main>
+    <footer>
+        &copy; 2023 Puzzle Solver Web App
+    </footer>
+
+    <script>
+        // Get references to the buttons
+        const sudokuButton = document.getElementById('sudoku-button');
+        const crosswordButton = document.getElementById('crossword-button');
+        const wordPuzzleButton = document.getElementById('word-puzzle-button');
+
+        // Add click event listeners to each button
+        sudokuButton.addEventListener('click', function () {
+            // Redirect to the Sudoku page using Flask's url_for function
+            window.location.href = '{{ url_for("sudoku") }}';
+        });
+
+        crosswordButton.addEventListener('click', function () {
+            // Redirect to the Crossword page using Flask's url_for function
+            window.location.href = '{{ url_for("crossword") }}';
+        });
+
+        wordPuzzleButton.addEventListener('click', function () {
+            // Redirect to the Word Puzzle page using Flask's url_for function
+            window.location.href = '{{ url_for("wordpuzzle") }}';
+        });
+    </script>
+</body>
+</html>
