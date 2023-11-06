@@ -33,11 +33,35 @@
             </div>
             <br><br>
             <div class="buttons_form">
-                <button type="button" id="crop-button">Crop</button>
-                <button type="submit" id="upload-button">Upload</button>
+              <button type="button" id="crop-button"><i class="fas fa-crop"></i>&nbsp;&nbsp;Crop</button>
+              <button type="submit" id="solve-puzzle" name="solve-puzzle">Solve</button>
+              <button type="submit" id="upload-button"><i class="fas fa-upload"></i>Upload</button>
+</div>
+              <style>
+.buttons_form {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-            </div>
-        </form>
+.buttons_form button {
+  margin: 0 5px; /* Add some spacing between buttons if needed */
+}
+
+#solve-puzzle{
+background: rgb(22, 114, 212);
+font-size: 20px;
+border: none;
+width: 188px;
+height: 45px;
+border-radius: 4px;
+border-bottom: 4px solid #1a117a;
+}
+              </style>
+
+          </div>
+      </form>
         {% else %}
         <form action="{{url_for('wordsearch')}}" method="POST" enctype="multipart/form-data">
             <input type="file" name="file" id="file-input" style="display: none;">

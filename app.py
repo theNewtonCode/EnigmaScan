@@ -42,10 +42,10 @@ def sudoku():
 
     return render_template('sudoku.html', success=success, statement=statement, image=image)
 
-@app.route('/sudokuSolve')
+@app.route('/sudokuSolve', methods=['GET', 'POST'])
 def sudokuSolve():
-    # Handle the 'x.html' route
-    X = [
+    success = False
+    initial_matrix = [
     [5, 3, 0, 0, 7, 0, 0, 0, 0],
     [6, 0, 0, 1, 9, 5, 0, 0, 0],
     [0, 9, 8, 0, 0, 0, 0, 6, 0],
@@ -56,8 +56,53 @@ def sudokuSolve():
     [0, 0, 0, 4, 1, 9, 0, 0, 5],
     [0, 0, 0, 0, 8, 0, 0, 7, 9]
 ]
+    if request.method == 'POST':
+        matrix = []
 
-    return render_template('solvedSudoku.html', X=X)
+        for row in range(9):
+            matrix_row = []
+            for col in range(9):
+                cell_value = request.form['cell_{}_{}'.format(row, col)]
+                matrix_row.append(cell_value)
+            matrix.append(matrix_row)
+
+        # Now, 'matrix' contains the data submitted from the form
+        # print(matrix)
+        success=True
+        return render_template('solvedSudoku.html', X=matrix, success=success)
+
+    # For the initial GET request, render the template with your initial 'X' data
+    return render_template('solvedSudoku.html', X=initial_matrix, success=success)
+
+@app.route('/wordSolve', methods=['GET', 'POST'])
+def wordSolve():
+    success = False
+    initial_matrix = [
+    [5, 3, 0, 0, 7, 0, 0, 0, 0],
+    [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    [0, 9, 8, 0, 0, 0, 0, 6, 0]
+]
+    if request.method == 'POST':
+        matrix = []
+
+        # Determine the number of rows and columns based on the form submission
+        rows = int(request.form['rows'])  # Replace 'rows' with the actual input name for rows
+        cols = int(request.form['cols'])  # Replace 'cols' with the actual input name for columns
+
+        for row in range(rows):
+            matrix_row = []
+            for col in range(cols):
+                cell_value = request.form['cell_{}_{}'.format(row, col)]
+                matrix_row.append(cell_value)
+            matrix.append(matrix_row)
+
+        # Now, 'matrix' contains the data submitted from the form
+        # print(matrix)
+        success=True
+        return render_template('solvedWord.html', X=matrix, success=success)
+
+    # For the initial GET request, render the template with your initial 'X' data
+    return render_template('solvedWord.html', X=initial_matrix, success=success)
 
 @app.route('/wordsearch', methods=['GET', 'POST'])
 def wordsearch():
@@ -66,6 +111,9 @@ def wordsearch():
     image = None
 
     if request.method == 'POST':
+        if 'solve-puzzle' in request.form:
+                    # If the form was submitted by the "Solve" button, redirect to x.html
+            return redirect(url_for('wordSolve'))
         if 'file' not in request.files:
             statement = "No file part"
         else:

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wordpuzzle</title>
+    <style>
+                *{
+            margin: 0px;
+            padding: 0px;
+        }
+        main {
+            font-family: Arial, sans-serif;
+            /* background-color: #888888ab; */
+            display: flex;
+            justify-content: center;
+            height: 90vh;
+            align-items: center;
+            margin: 0;
+        }
+
+        .wordsearch-form {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 18px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            height: 90%;
+            border: none;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .submit-button,
+        .back-button {
+            display: block;
+            width: 100%;
+            background-color: #e7609b;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .submit-button:hover,
+        .back-button:hover {
+            background-color: #000000;
+        }
+
+        form a {
+            text-decoration: none;
+        }
+
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #e7609b;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        {% if success %}
+        <form class="wordsearch-form" action="/wordSolve" method="post">
+            <h1
+                style="font-size: 24px; color: #0a58ad; text-align: center; margin-top: 10px; margin-bottom: 20px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                Here's your solved puzzle!</h1>
+
+            <table>
+                <tbody>
+                    <!-- Create a dynamic wordpuzzle-like table with pre-populated values -->
+                    {% for row in range(X|length) %}
+                    <tr>
+                        {% for col in range(X[0]|length) %}
+                        <td><input type="text" name="cell_{{ row }}_{{ col }}" value="{{ X[row][col] }}" maxlength="1">
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/wordsearch"><button class="back-button" type="button">Back to Home</button></a>
+        </form>
+
+
+        {% else %}
+        <form class="wordsearch-form" action="/wordSolve" method="post">
+            <!-- Add hidden input fields for rows and columns -->
+            <input type="hidden" name="rows" value="{{ X|length }}">
+            <input type="hidden" name="cols" value="{{ X[0]|length }}">
+
+            <table>
+                <tbody>
+                    <!-- Create a dynamic wordpuzzle-like table with pre-populated values -->
+                    {% for row in range(X|length) %}
+                    <tr>
+                        {% for col in range(X[0]|length) %}
+                        <td><input type="text" name="cell_{{ row }}_{{ col }}" value="{{ X[row][col] }}" maxlength="1">
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <input class="submit-button" type="submit" value="Submit">
+        </form>
+
+        {% endif %}
+    </main>
+    <footer>
+        &copy; 2023 Word Puzzle Solver
+    </footer>
+</body>
+
+</html>
