@@ -14,7 +14,7 @@
                 <li class="nav-item active">Home</li>
                 <li class="nav-item"><a href="{{url_for('sudoku')}}">Sudoku</a></li>
                 <li class="nav-item"><a href="{{url_for('crossword')}}">Crossword</a></li>
-                <li class="nav-item"><a href="{{url_for('wordpuzzle')}}">Word Puzzle</a></li>
+                <li class="nav-item"><a href="{{url_for('wordsearch')}}">Word Puzzle</a></li>
             </ul>
         </nav>
     </header>
@@ -69,7 +69,7 @@
 
         wordPuzzleButton.addEventListener('click', function () {
             // Redirect to the Word Puzzle page using Flask's url_for function
-            window.location.href = '{{ url_for("wordpuzzle") }}';
+            window.location.href = '{{ url_for("wordsearch") }}';
         });
     </script>
 </body>

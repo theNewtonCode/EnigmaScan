@@ -23,6 +23,9 @@ def sudoku():
     image = None
 
     if request.method == 'POST':
+        if 'solve-puzzle' in request.form:
+                    # If the form was submitted by the "Solve" button, redirect to x.html
+            return redirect(url_for('sudokuSolve'))
         if 'file' not in request.files:
             statement = "No file part"
         else:
@@ -38,6 +41,46 @@ def sudoku():
                 statement = "Invalid file type. Allowed extensions: jpg, jpeg, png, gif"
 
     return render_template('sudoku.html', success=success, statement=statement, image=image)
+
+@app.route('/sudokuSolve')
+def sudokuSolve():
+    # Handle the 'x.html' route
+    X = [
+    [5, 3, 0, 0, 7, 0, 0, 0, 0],
+    [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    [0, 9, 8, 0, 0, 0, 0, 6, 0],
+    [8, 0, 0, 0, 6, 0, 0, 0, 3],
+    [4, 0, 0, 8, 0, 3, 0, 0, 1],
+    [7, 0, 0, 0, 2, 0, 0, 0, 6],
+    [0, 6, 0, 0, 0, 0, 2, 8, 0],
+    [0, 0, 0, 4, 1, 9, 0, 0, 5],
+    [0, 0, 0, 0, 8, 0, 0, 7, 9]
+]
+
+    return render_template('solvedSudoku.html', X=X)
+
+@app.route('/wordsearch', methods=['GET', 'POST'])
+def wordsearch():
+    success = None
+    statement = None
+    image = None
+
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            statement = "No file part"
+        else:
+            file = request.files['file']
+            if file.filename == '':
+                statement = "No selected file"
+            elif file and allowed_file(file.filename):
+                filename = os.path.join(app.config['UPLOAD_FOLDER'], 'puzzle.png')
+                file.save(filename)
+                image = filename
+                success = True
+            else:
+                statement = "Invalid file type. Allowed extensions: jpg, jpeg, png, gif"
+
+    return render_template('wordpuzzle.html', success=success, statement=statement, image=image)
 
 def allowed_file(filename):
     allowed_extensions = {'jpg', 'jpeg', 'png', 'gif'}
@@ -88,9 +131,6 @@ def save_cropped_image():
 #     allowed_extensions = {'jpg', 'jpeg', 'png', 'gif'}
 #     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
 
-@app.route('/wordpuzzle')
-def wordpuzzle():
-    return render_template('wordpuzzle.html')
 
 
 @app.route('/crossword')

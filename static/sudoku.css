@@ -105,7 +105,9 @@ transition: transform 0.2s ease, background-color 0.2s ease;
 outline: none;
 cursor: pointer;
 }
-
+#upload-button i {
+  color: #ffffff; /* Change to the desired color */
+}
 /* Hover styles */
 form button:hover {
 background: #117A60;

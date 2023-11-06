@@ -6,6 +6,7 @@
     <title>EnigmaScan Sudoku</title>
     <!-- <link rel="stylesheet" href="sudoku.css"> -->
     <link rel="stylesheet" href="{{url_for('static', filename='sudoku.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.min.js"></script>
 
@@ -13,12 +14,13 @@
 <body>
     <header>
         <h1>EnigmaScan Sudoku</h1>
+        
         <nav>
             <ul>
                 <li class="nav-item"><a href="{{url_for('index')}}">Home</a></li>
                 <li class="nav-item active">Sudoku</li>
                 <li class="nav-item"><a href="{{url_for('crossword')}}">Crossword</a></li>
-                <li class="nav-item"><a href="{{url_for('wordpuzzle')}}">Word Puzzle</a></li>
+                <li class="nav-item"><a href="{{url_for('wordsearch')}}">Word Puzzle</a></li>
             </ul>
         </nav>
     </header>
@@ -33,8 +35,32 @@
             </div>
             <br><br>
             <div class="buttons_form">
-                <button type="button" id="crop-button">Crop</button>
-                <button type="submit" id="upload-button">Upload</button>
+                <button type="button" id="crop-button"><i class="fas fa-crop"></i>&nbsp;&nbsp;Crop</button>
+                <button type="submit" id="solve-puzzle" name="solve-puzzle">Solve</button>
+                <button type="submit" id="upload-button"><i class="fas fa-upload"></i>Upload</button>
+</div>
+                <style>
+.buttons_form {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons_form button {
+    margin: 0 5px; /* Add some spacing between buttons if needed */
+}
+
+#solve-puzzle{
+  background: rgb(212, 202, 22);
+  font-size: 20px;
+border: none;
+width: 188px;
+height: 45px;
+border-radius: 4px;
+border-bottom: 4px solid #7a6e11;
+}
+                </style>
 
             </div>
         </form>
@@ -46,8 +72,8 @@
             </div>
             <br><br>
             <div class="buttons_form">
-                <button type="button" id="crop-button">Crop</button>
-                <button type="submit" id="upload-button">Upload</button>
+                <button type="button" id="crop-button"><i class="fas fa-crop"></i>&nbsp;&nbsp;Crop</button>
+                <button type="submit" id="upload-button"><i class="fas fa-upload"></i>&nbsp;&nbsp;Upload</button>
 
             </div>
         </form>
@@ -58,7 +84,7 @@
               <div id="imageModal" class="modal">
                 <span class="close" id="closeModal">&times;</span>
                 <div class="modal-content">
-                  <img src="static/uploads/sudoku.png" alt="Uploaded Image" id="uploadedImage">
+                  <img src="static/uploads/puzzle.png" alt="Uploaded Image" id="uploadedImage">
                   <button id="save-cropped-image">Save Cropped Image</button>
                 </div>
               </div>
