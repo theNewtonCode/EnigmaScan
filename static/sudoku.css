@@ -1,0 +1,195 @@
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+margin: 0;
+padding: 0;
+}
+
+body {
+font-family: Arial, sans-serif;
+background-color: #f5f5f5; /* Light gray background */
+}
+
+/* Header styles */
+header {
+background: linear-gradient(90deg, #16a085, #4dffdb);; /* Gradient background */
+color: #fff;
+padding: 20px 0; /* Added top and bottom padding for spacing */
+text-align: center;
+border-bottom: 2px solid #fff; /* Add a white border at the bottom */
+}
+
+/* Navigation styles */
+nav ul {
+list-style: none;
+margin-top: 10px; /* Add spacing between the header and navigation */
+}
+
+.nav-item {
+display: inline-block;
+margin-right: 20px;
+}
+
+.nav-item.active {
+font-weight: bold;
+}
+
+/* Link styles */
+.nav-item a {
+text-decoration: none;
+color: #fff;
+font-size: 16px;
+transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.nav-item a:hover {
+color: #ffc107; /* Change color on hover */
+}
+
+/* Header title styles */
+h1 {
+font-size: 28px; /* Increase the font size for the header title */
+margin-bottom: 10px; /* Add spacing between the title and navigation */
+}
+
+
+main {
+padding: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: calc(100vh - 90px);
+}
+
+body{
+background: rgba(0,0,0,0.9);
+}
+form{
+position: absolute;
+top: 50%;
+left: 50%;
+margin-top: -100px;
+margin-left: -250px;
+width: 500px;
+height: 200px;
+border: 4px dashed #fff;
+}
+form p{
+width: 100%;
+height: 100%;
+text-align: center;
+line-height: 170px;
+color: #ffffff;
+font-family: Arial;
+}
+form input{
+position: absolute;
+margin: 0;
+padding: 0;
+width: 100%;
+height: 100%;
+outline: none;
+opacity: 0;
+}
+/* Base button styles */
+form button {
+font-family: Arial, sans-serif; /* Change the font to Arial or another preferred font */
+font-size: 16px; /* Increase the font size for better readability */
+color: #fff;
+background: #16a085;
+border: none;
+width: 158px;
+height: 35px;
+border-radius: 4px;
+border-bottom: 4px solid #117A60;
+transition: transform 0.2s ease, background-color 0.2s ease;
+outline: none;
+cursor: pointer;
+}
+
+/* Hover styles */
+form button:hover {
+background: #117A60;
+transform: translateY(-2px); /* Add a slight upward lift on hover */
+}
+
+/* Active styles (when the button is clicked) */
+form button:active {
+transform: translateY(2px); /* Add a slight downward press when clicked */
+}
+
+/* Disabled styles */
+form button:disabled {
+background: #ccc;
+cursor: not-allowed;
+}
+
+.buttons_form {
+margin-top: 30px;
+display: grid;
+grid-template-columns: repeat(2, 250px); /* Use repeat for two columns */
+justify-items: center;
+}
+form input.dragover {
+background-color: #009688;
+color: #b20808;
+}
+
+#save-cropped-image{
+font-family: Arial, sans-serif; /* Change the font to Arial or another preferred font */
+font-size: 16px; /* Increase the font size for better readability */
+color: #fff;
+background: #16a085;
+border: none;
+width: 258px;
+height: 35px;
+border-radius: 4px;
+border-bottom: 4px solid #117A60;
+transition: transform 0.2s ease, background-color 0.2s ease;
+outline: none;
+cursor: pointer;
+margin-top: 50px;
+
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 10%;
+    top: 10%;
+    width: 80%;
+    height: 80%;
+    background-color: rgba(0,0,0,0.9);
+    overflow:scroll;
+  }
+  
+  .modal-content {
+    text-align: center;
+    margin: 10% auto;
+    background-color: rgba(0,0,0,0.9);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+  }
+  
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+  }
+  .modal.hidden {
+    display: none;
+  }
+  
+  
+
+footer {
+text-align: center;
+padding: 10px;
+background-color: #009688;
+color: #fff;
+}

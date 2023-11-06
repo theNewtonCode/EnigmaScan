@@ -4,184 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EnigmaScan Sudoku</title>
-    <link rel="stylesheet" href="sudoku.css">
+    <!-- <link rel="stylesheet" href="sudoku.css"> -->
+    <link rel="stylesheet" href="{{url_for('static', filename='sudoku.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.min.js"></script>
+
 </head>
 <body>
-    <style>
-        /* Reset some default styles */
-body, h1, h2, h3, p, ul, li {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5; /* Light gray background */
-}
-
-/* Header styles */
-header {
-    background: linear-gradient(90deg, #16a085, #4dffdb);; /* Gradient background */
-    color: #fff;
-    padding: 20px 0; /* Added top and bottom padding for spacing */
-    text-align: center;
-    border-bottom: 2px solid #fff; /* Add a white border at the bottom */
-}
-
-/* Navigation styles */
-nav ul {
-    list-style: none;
-    margin-top: 10px; /* Add spacing between the header and navigation */
-}
-
-.nav-item {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-.nav-item.active {
-    font-weight: bold;
-}
-
-/* Link styles */
-.nav-item a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    transition: color 0.3s ease; /* Smooth color transition on hover */
-}
-
-.nav-item a:hover {
-    color: #ffc107; /* Change color on hover */
-}
-
-/* Header title styles */
-h1 {
-    font-size: 28px; /* Increase the font size for the header title */
-    margin-bottom: 10px; /* Add spacing between the title and navigation */
-}
-
-
-main {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 90px);
-}
-
-body{
-  background: rgba(0,0,0,0.9);
-}
-form{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -100px;
-  margin-left: -250px;
-  width: 500px;
-  height: 200px;
-  border: 4px dashed #fff;
-}
-form p{
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  line-height: 170px;
-  color: #ffffff;
-  font-family: Arial;
-}
-form input{
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  outline: none;
-  opacity: 0;
-}
-/* Base button styles */
-form button {
-    font-family: Arial, sans-serif; /* Change the font to Arial or another preferred font */
-    font-size: 16px; /* Increase the font size for better readability */
-    color: #fff;
-    background: #16a085;
-    border: none;
-    width: 158px;
-    height: 35px;
-    border-radius: 4px;
-    border-bottom: 4px solid #117A60;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    outline: none;
-    cursor: pointer;
-}
-
-/* Hover styles */
-form button:hover {
-    background: #117A60;
-    transform: translateY(-2px); /* Add a slight upward lift on hover */
-}
-
-/* Active styles (when the button is clicked) */
-form button:active {
-    transform: translateY(2px); /* Add a slight downward press when clicked */
-}
-
-/* Disabled styles */
-form button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-}
-
-.buttons_form {
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(2, 250px); /* Use repeat for two columns */
-    justify-items: center;
-}
-form input.dragover {
-        background-color: #009688;
-        color: #b20808;
-    }
-
-
-.puzzle-solution {
-}
-
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #009688;
-    color: #fff;
-}
-
-    </style>
     <header>
         <h1>EnigmaScan Sudoku</h1>
         <nav>
             <ul>
-                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="{{url_for('index')}}">Home</a></li>
                 <li class="nav-item active">Sudoku</li>
-                <li class="nav-item"><a href="crossword.html">Crossword</a></li>
-                <li class="nav-item"><a href="wordpuzzle.html">Word Puzzle</a></li>
+                <li class="nav-item"><a href="{{url_for('crossword')}}">Crossword</a></li>
+                <li class="nav-item"><a href="{{url_for('wordpuzzle')}}">Word Puzzle</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <form action="upload.php" method="POST">
-            <!-- Hidden input to trigger file selection dialog -->
-            <input type="file" name="uploaded_files[]" id="file-input" multiple style="display: none;">
+        {% if success %}
+        <form action="{{url_for('sudoku')}}" method="POST" enctype="multipart/form-data">
+            <!-- <input type="file" name="file" id="file-input" style="display: none;"> -->
+            <div class="drop-area" id="drop-area">
+
+                <!-- <p>Drag your files here or click in this area.</p> -->
+                <p>Puzzle Uploaded</p>
+            </div>
+            <br><br>
+            <div class="buttons_form">
+                <button type="button" id="crop-button">Crop</button>
+                <button type="submit" id="upload-button">Upload</button>
+
+            </div>
+        </form>
+        {% else %}
+        <form action="{{url_for('sudoku')}}" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" id="file-input" style="display: none;">
             <div class="drop-area" id="drop-area">
                 <p>Drag your files here or click in this area.</p>
             </div>
             <br><br>
             <div class="buttons_form">
-                <button type="button">Crop</button>
-                <button type="submit">Proceed</button>
+                <button type="button" id="crop-button">Crop</button>
+                <button type="submit" id="upload-button">Upload</button>
+
             </div>
         </form>
-            <div class="puzzle-solution">
-            </div>
+        {% endif %}
+
+        <div class="puzzle-solution">
+            {% if success %}
+              <div id="imageModal" class="modal">
+                <span class="close" id="closeModal">&times;</span>
+                <div class="modal-content">
+                  <img src="static/uploads/sudoku.png" alt="Uploaded Image" id="uploadedImage">
+                  <button id="save-cropped-image">Save Cropped Image</button>
+                </div>
+              </div>
+            {% elif statement %}
+              <p>Upload failed! {{ statement }}</p>
+            {% endif %}
+          </div>
+          
+          
+          
+            <!-- <div class="puzzle-solution">
+            </div> -->
 
     </main>
     <footer>
@@ -212,6 +101,58 @@ const dropArea = document.getElementById('drop-area');
         dropArea.addEventListener('click', () => {
             fileInput.click();
         });
+
+      
+// JavaScript to handle image cropping, saving, and modal
+const imageModal = document.getElementById('imageModal');
+const uploadedImage = document.getElementById('uploadedImage');
+const closeModal = document.getElementById('closeModal');
+const cropButton = document.getElementById('crop-button');
+const saveCroppedImage = document.getElementById('save-cropped-image');
+let cropper;
+
+function openModal() {
+  imageModal.style.display = 'block';
+  cropper = new Cropper(uploadedImage, {
+    aspectRatio: 1, // You can adjust the aspect ratio as needed
+    viewMode: 2,
+  });
+}
+
+function closeModalWindow() {
+  imageModal.style.display = 'none';
+  cropper.destroy();
+}
+
+function saveCroppedImageHandler() {
+  const croppedImage = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+  // Send the cropped image to the server using AJAX
+  fetch('/save_cropped_image', {
+    method: 'POST',
+    body: JSON.stringify({ image: croppedImage }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert('Cropped image saved successfully.');
+        closeModalWindow();
+      } else {
+        alert('Failed to save the cropped image.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+cropButton.addEventListener('click', openModal);
+closeModal.addEventListener('click', closeModalWindow);
+saveCroppedImage.addEventListener('click', saveCroppedImageHandler);
+
+
       </script>
 </body>
 </html>
