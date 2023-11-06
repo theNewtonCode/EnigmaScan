@@ -1,7 +1,7 @@
 /* Reset some default styles */
-body, h1, h2, h3, p, ul, li {
-    margin: 0;
-    padding: 0;
+* {
+    margin: 0px;
+    padding: 0px;
 }
 
 body {
@@ -11,11 +11,11 @@ body {
 
 /* Header styles */
 header {
-    background: linear-gradient(90deg, #460096 0%, #009688 100%);
+    background: linear-gradient(90deg, #000000 0%, #00828e 52%, #00828e 60%, #000000 100%);
     color: #fff;
     padding: 20px 0;
     text-align: center;
-    border-bottom: 2px solid #fff;
+    /* border-bottom: 2px solid #000000; */
 }
 
 /* Navigation styles */
@@ -52,22 +52,39 @@ h1 {
 
 .introd {
     margin-top: 200px;
-    padding: 10px 30px 50px 30px;
+    padding: 10px 30px 30px 30px;
     background-color: #00000070;
     border-radius: 50px;
     text-align: center;
 }
 
 .introd h2 {
-    font-size: 80px; /* Increase the font size even more */
-    font-weight: bold; /* Make it bold */
-    background: linear-gradient(90deg, #fbfbfb 56%, #460096 44%); /* Split colors evenly */
-    -webkit-background-clip: text; /* Clip the background to the text */
-    -webkit-text-fill-color: transparent; /* Make the text transparent */
+    font-size: 80px;
+    font-weight: bold;
+    color: transparent;
+    text-align: center;
+    background: linear-gradient(90deg, #ff6a00, #ffcc29, #f34d87, #a80077, #005ab5, #00a2ff, #3ce7bf, #00ff00, #ff6a00);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    animation: effect 30s linear infinite;
+    margin-bottom: 20px;
 }
 
+@keyframes effect {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+    
+
+
 /* Hero section styles */
-#intro {
+/* #intro {
     height: 100vh;
     background: url('./imgs/istockphoto-1271369710-1024x1024.jpg') center/cover no-repeat;
     display: flex;
@@ -75,6 +92,24 @@ h1 {
     color: #fff;
     flex-direction: column;
     text-align: center;
+} */
+#intro {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    background-image: url('./imgs/img_back_index_2.jpg') ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* transition: background 1s ease-in-out; */
+}
+.introd p{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0px;
 }
 
 /* Main content section styles */
@@ -113,16 +148,22 @@ h1 {
     padding: 20px;
     margin: 20px;
     text-align: center;
-}
 
+    transition: transform 0.3s ease;
+}
+.puzzle-card:hover {
+    transform: scale(1.05); /* Enlarge the card on hover */
+}
 
 .puzzle-card h2 {
     font-size: 34px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .puzzle-card p {
     font-size: 16px;
     margin-bottom: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 /* button {
@@ -142,7 +183,7 @@ h1 {
     button {
       align-self: center;
       margin-top: 10px;
-      background-color: #fff;
+      background-color: rgb(254, 195, 122);
       background-image: none;
       background-position: 0 90%;
       background-repeat: repeat no-repeat;
@@ -183,7 +224,7 @@ h1 {
 
 footer {
     text-align: center;
-    padding: 10px;
-    background-color: #333;
+    padding: 30px;
+    background: linear-gradient(90deg, #000000 0%, #00828e 52%, #00828e 60%, #000000 100%);
     color: #fff;
 }
