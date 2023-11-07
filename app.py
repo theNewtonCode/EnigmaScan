@@ -2,6 +2,10 @@ from flask import Flask,render_template, session, redirect, url_for, flash, requ
 from PIL import Image
 import os
 import base64
+from sudoku_ocr import SudokuOcr as sko
+from word_puz_ocr import WordOcr as wdo
+from solve_sudoku import SudokuSolver
+from solve_word import EnigmaSearch
 
 app = Flask(__name__)
 app.secret_key = 'enigmascan2023'
@@ -45,17 +49,10 @@ def sudoku():
 @app.route('/sudokuSolve', methods=['GET', 'POST'])
 def sudokuSolve():
     success = False
-    initial_matrix = [
-    [5, 3, 0, 0, 7, 0, 0, 0, 0],
-    [6, 0, 0, 1, 9, 5, 0, 0, 0],
-    [0, 9, 8, 0, 0, 0, 0, 6, 0],
-    [8, 0, 0, 0, 6, 0, 0, 0, 3],
-    [4, 0, 0, 8, 0, 3, 0, 0, 1],
-    [7, 0, 0, 0, 2, 0, 0, 0, 6],
-    [0, 6, 0, 0, 0, 0, 2, 8, 0],
-    [0, 0, 0, 4, 1, 9, 0, 0, 5],
-    [0, 0, 0, 0, 8, 0, 0, 7, 9]
-]
+    image_path = 'EnigmaScan/static/uploads/cropped_puzzle.jpg'
+    sudoku_solver = sko(image_path)
+    sudoku_matrix = sudoku_solver.solve_sudoku()
+    print(sudoku_matrix)
     if request.method == 'POST':
         matrix = []
 
@@ -66,29 +63,33 @@ def sudokuSolve():
                 matrix_row.append(cell_value)
             matrix.append(matrix_row)
 
+        solver = SudokuSolver()
+
+        # Solve the Sudoku using the C++ program
+        result_matrix = solver.solve(matrix)
         # Now, 'matrix' contains the data submitted from the form
         # print(matrix)
         success=True
-        return render_template('solvedSudoku.html', X=matrix, success=success)
+        return render_template('solvedSudoku.html', X=result_matrix, success=success)
 
     # For the initial GET request, render the template with your initial 'X' data
-    return render_template('solvedSudoku.html', X=initial_matrix, success=success)
+    return render_template('solvedSudoku.html', X=sudoku_matrix, success=success)
+
 
 @app.route('/wordSolve', methods=['GET', 'POST'])
 def wordSolve():
     success = False
-    initial_matrix = [
-    [5, 3, 0, 0, 7, 0, 0, 0, 0],
-    [6, 0, 0, 1, 9, 5, 0, 0, 0],
-    [0, 9, 8, 0, 0, 0, 0, 6, 0]
-]
+    image_path = 'EnigmaScan/static/uploads/cropped_puzzle.jpg'
+    num1 = request.args.get('num1')
+    num2 = request.args.get('num2')
+    word_ocr =wdo(image_path, int(num1), int(num2))
+    word_matrix = word_ocr.solve_word()
     if request.method == 'POST':
         matrix = []
-
+        items = request.form.get('item_list').split(',')
         # Determine the number of rows and columns based on the form submission
         rows = int(request.form['rows'])  # Replace 'rows' with the actual input name for rows
         cols = int(request.form['cols'])  # Replace 'cols' with the actual input name for columns
-
         for row in range(rows):
             matrix_row = []
             for col in range(cols):
@@ -99,10 +100,26 @@ def wordSolve():
         # Now, 'matrix' contains the data submitted from the form
         # print(matrix)
         success=True
-        return render_template('solvedWord.html', X=matrix, success=success)
+        enigma_solver = EnigmaSearch()
+        indexes = []
+        for i in items:
+            indexes.append(enigma_solver.enigma_search(matrix, i))
+
+        i =0 
+        notfound = []
+        found_indexes = []
+        for index in indexes:
+            row, col = index
+            if row == 'p':
+                notfound.append(items[i])
+            else:
+                found_indexes.append(index)
+            i+=1
+        return render_template('solvedWord.html', X=matrix, success=success, notfound=notfound, indexesToHighlight=found_indexes)
 
     # For the initial GET request, render the template with your initial 'X' data
-    return render_template('solvedWord.html', X=initial_matrix, success=success)
+    print(word_matrix)
+    return render_template('solvedWord.html', X=word_matrix, success=success)
 
 @app.route('/wordsearch', methods=['GET', 'POST'])
 def wordsearch():
@@ -113,7 +130,9 @@ def wordsearch():
     if request.method == 'POST':
         if 'solve-puzzle' in request.form:
                     # If the form was submitted by the "Solve" button, redirect to x.html
-            return redirect(url_for('wordSolve'))
+            number1 = request.form.get('number1')
+            number2 = request.form.get('number2')
+            return redirect(url_for('wordSolve', num1=number1, num2=number2))
         if 'file' not in request.files:
             statement = "No file part"
         else:
