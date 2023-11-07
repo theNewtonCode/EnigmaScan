@@ -52,7 +52,7 @@ def sudokuSolve():
     image_path = 'EnigmaScan/static/uploads/cropped_puzzle.jpg'
     sudoku_solver = sko(image_path)
     sudoku_matrix = sudoku_solver.solve_sudoku()
-    print(sudoku_matrix)
+    # print(sudoku_matrix)
     if request.method == 'POST':
         matrix = []
 
@@ -114,7 +114,7 @@ def wordSolve():
 
     # For the initial GET request, render the template with your initial 'X' data
     word_matrix = request.args.get('word_matrix')
-    print(word_matrix)
+    # print(word_matrix)
     return render_template('solvedWord.html', X=word_matrix, success=success)
 
 @app.route('/wordsearch', methods=['GET', 'POST'])
