@@ -79,11 +79,6 @@ def sudokuSolve():
 @app.route('/wordSolve', methods=['GET', 'POST'])
 def wordSolve():
     success = False
-    image_path = 'EnigmaScan/static/uploads/cropped_puzzle.jpg'
-    num1 = request.args.get('num1')
-    num2 = request.args.get('num2')
-    word_ocr =wdo(image_path, int(num1), int(num2))
-    word_matrix = word_ocr.solve_word()
     if request.method == 'POST':
         matrix = []
         items = request.form.get('item_list').split(',')
@@ -111,13 +106,14 @@ def wordSolve():
         for index in indexes:
             row, col = index
             if row == 'p':
-                notfound.append(items[i])
+                notfound.append(items[i].upper())
             else:
                 found_indexes.append(index)
             i+=1
         return render_template('solvedWord.html', X=matrix, success=success, notfound=notfound, indexesToHighlight=found_indexes)
 
     # For the initial GET request, render the template with your initial 'X' data
+    word_matrix = request.args.get('word_matrix')
     print(word_matrix)
     return render_template('solvedWord.html', X=word_matrix, success=success)
 
@@ -132,7 +128,10 @@ def wordsearch():
                     # If the form was submitted by the "Solve" button, redirect to x.html
             number1 = request.form.get('number1')
             number2 = request.form.get('number2')
-            return redirect(url_for('wordSolve', num1=number1, num2=number2))
+            image_path = 'EnigmaScan/static/uploads/cropped_puzzle.jpg'
+            word_ocr =wdo(image_path, int(number1), int(number2))
+            word_matrix = word_ocr.solve_word()
+            return redirect(url_for('wordSolve', word_matrix=word_matrix))
         if 'file' not in request.files:
             statement = "No file part"
         else:
@@ -145,6 +144,7 @@ def wordsearch():
                 image = filename
                 success = True
             else:
+
                 statement = "Invalid file type. Allowed extensions: jpg, jpeg, png, gif"
 
     return render_template('wordpuzzle.html', success=success, statement=statement, image=image)

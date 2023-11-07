@@ -40,7 +40,9 @@
             font-size: 18px;
             border: 1px solid #ccc;
         }
-
+        td.highlighted {
+    background-color: yellow;
+}
         input[type="text"] {
             width: 90%;
             height: 90%;
@@ -104,6 +106,17 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <br>
+                {% if notfound %}
+                <div class="elements-list" style="font-size: 18px;
+                font-weight: bold;
+                color: #373737; /* Change the color to your desired decoration color */ /* Add an underline decoration */
+                border: 2px solid #545454; /* Add a 1px thin border with a black color */
+    padding: 5px; ">
+                    <h6>Words Not Found: </h6>
+                    <p>{{ notfound|join(', ') }}</p>
+                </div>
+        {% endif %}
             <a href="/wordsearch"><button class="back-button" type="button">Back to Home</button></a>
         </form>
 
@@ -142,6 +155,22 @@
     <footer>
         &copy; 2023 Word Puzzle Solver
     </footer>
+    <!-- <script>
+        function highlightCells(indexes) {
+    var table = document.querySelector('table');
+    var rows = table.querySelectorAll('tr');
+
+    indexes.forEach(function(index) {
+        var [row, col] = index;
+        if (row >= 0 && row < rows.length) {
+            var cells = rows[row].querySelectorAll('td');
+            if (col >= 0 && col < cells.length) {
+                cells[col].style.backgroundColor = 'yellow';
+            }
+        }
+    });
+}
+    </script> -->
 </body>
 
 </html>
