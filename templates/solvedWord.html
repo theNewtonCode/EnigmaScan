@@ -5,19 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>wordpuzzle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
     <style>
                 *{
             margin: 0px;
             padding: 0px;
         }
         main {
-            font-family: Arial, sans-serif;
-            /* background-color: #888888ab; */
-            display: flex;
-            justify-content: center;
+
             height: 90vh;
+
+        }
+        .result{
+            display: flex;
             align-items: center;
             margin: 0;
+            font-family: Arial, sans-serif;
+            /* background-color: #888888ab; */
+            justify-content: center;
         }
 
         .wordsearch-form {
@@ -64,6 +73,13 @@
             cursor: pointer;
             margin-top: 20px;
         }
+        #captureButton {
+            margin: 5vh auto;
+            margin-bottom: 8vh;
+            width: 15%;
+            background-color: #000000;
+
+        }
 
         .submit-button:hover,
         .back-button:hover {
@@ -87,7 +103,9 @@
 <body>
     <main>
         {% if success %}
-        <form class="wordsearch-form" action="/wordSolve" method="post">
+        <button class="back-button" id="captureButton">Download as Image</button>
+        <div class="result">
+        <form class="wordsearch-form" action="/wordSolve" method="post" id="myForm">
             <h1
                 style="font-size: 24px; color: #0a58ad; text-align: center; margin-top: 10px; margin-bottom: 20px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
                 Here's your solved puzzle!</h1>
@@ -117,11 +135,13 @@
                     <p>{{ notfound|join(', ') }}</p>
                 </div>
         {% endif %}
-            <a href="/wordsearch"><button class="back-button" type="button">Back to Home</button></a>
+            <a href="/wordsearch"><button class="back-button" type="button"><i class="fas fa-home"></i>                Back to Home</button></a>
         </form>
-
-
+    </div>
+        
         {% else %}
+        <div class="result">
+
         <form class="wordsearch-form" action="/wordSolve" method="post">
             <!-- Add hidden input fields for rows and columns -->
             <input type="hidden" name="rows" value="{{ X|length }}">
@@ -149,28 +169,25 @@
             </table>
             <input class="submit-button" type="submit" value="Submit">
         </form>
-
+</div>
         {% endif %}
     </main>
     <footer>
         &copy; 2023 Word Puzzle Solver
     </footer>
-    <!-- <script>
-        function highlightCells(indexes) {
-    var table = document.querySelector('table');
-    var rows = table.querySelectorAll('tr');
 
-    indexes.forEach(function(index) {
-        var [row, col] = index;
-        if (row >= 0 && row < rows.length) {
-            var cells = rows[row].querySelectorAll('td');
-            if (col >= 0 && col < cells.length) {
-                cells[col].style.backgroundColor = 'yellow';
-            }
-        }
-    });
-}
-    </script> -->
+    <script>
+        document.getElementById('captureButton').addEventListener('click', function() {
+     html2canvas(document.querySelector('.result'), {
+       onrendered: function(canvas) {
+           var customName = 'Enigmascan_Solved_WordPuzzle'; // Specify your custom image name here
+           Canvas2Image.saveAsPNG(canvas, canvas.width, canvas.height, customName);
+       }
+     });
+   });
+               
+                   </script>
+
 </body>
 
 </html>

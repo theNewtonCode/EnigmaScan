@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EnigmaScan 2023</title>
     <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
     <header>
-        <h1>EnigmaScan: Your Puzzle Pallette</h1>
         <nav>
             <ul>
                 <li class="nav-item active">Home</li>
@@ -19,27 +22,28 @@
         </nav>
     </header>
     <main>
+        <h1>ENIGMASCAN</h1>
         <section class="hero" id="intro">
             <div class="introd">
-                <h2>EnigmaScan</h2>
-                <p>Solve puzzles with ease using our app. Upload an image, choose your puzzle type, and get solutions in seconds!</p>
+                
+                <p>Your smart and efficient puzzle solver!</p>
             </div>
 
         </section>
         <section class="puzzle-buttons" id="puzzlesbtn">
-            <div class="puzzle-card">
+            <div class="puzzle-card" id="puzzle-card-1" >
                 <h2>Sudoku</h2>
                 <img src="{{ url_for('static', filename='imgs/sudko.jpeg') }}">
                 <p>Solve classic Sudoku puzzles and test your logic skills.</p>
                 <button id="sudoku-button">Solve Sudoku</button>
             </div>
-            <div class="puzzle-card">
+            <div class="puzzle-card" id="puzzle-card-2">
                 <h2>Crossword</h2>
                 <img src="{{ url_for('static', filename='imgs/crossw.jpg') }}">
                 <p>Crosswords challenge your vocabulary and knowledge.</p>
                 <button id="crossword-button">Solve Crossword</button>
             </div>
-            <div class="puzzle-card">
+            <div class="puzzle-card" id="puzzle-card-3">
                 <h2>Word Puzzle</h2>
                 <img src="{{ url_for('static', filename='imgs/words.jpg') }}">
                 <p>Word Puzzle develop your strategical thinking.</p>
@@ -72,6 +76,22 @@
             // Redirect to the Word Puzzle page using Flask's url_for function
             window.location.href = '{{ url_for("wordsearch") }}';
         });
+
+window.addEventListener('scroll', function() {
+  // Calculate the scroll position as a percentage of the page height
+  const scrollPosition = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  
+  // Map the scroll position to a color between light and dark
+  const lightColor = [54, 25, 105]; // Light color (e.g., white)
+  const darkColor = [0, 0, 0];       // Dark color (e.g., black)
+  const interpolatedColor = lightColor.map((channel, index) => {
+    return Math.round(channel + (darkColor[index] - channel) * (scrollPosition / 100));
+  });
+  
+  // Set the background color using RGB values
+  document.body.style.backgroundColor = `rgb(${interpolatedColor.join(',')})`;
+});
+
     </script>
 </body>
 </html>

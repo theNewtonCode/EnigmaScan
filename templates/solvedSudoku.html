@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sudoku</title>
+    <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    
     <style>
         *{
             margin: 0px;
@@ -88,7 +91,12 @@ background-color: #009688;
 color: #fff;
 }
 
+#captureButton {
+    margin-top: 40vh;
+            width: 250px;
+            background-color: #000000;
 
+        }
     </style>
 </head>
 
@@ -96,6 +104,22 @@ color: #fff;
     <main>
 
     {% if success %}
+    <style>
+        main{
+            display: grid;
+            justify-content: center;
+            grid-template-columns: 40% 60%;
+        }
+        .sudoku-form{
+            width: 80%;
+            justify-content: center;
+            display: grid;
+        }
+
+    </style>
+    <button class="back-button" id="captureButton">Download as Image</button>
+        
+    <div class="result">
     <form class="sudoku-form" action="/sudokuSolve" method="post">
         <table>
             <h1
@@ -115,8 +139,9 @@ color: #fff;
         <a href="/sudoku"><button class="back-button" type="button">Back to Home</button></a>
     </form>
 
-
+</div>
     {% else %}
+    <div class="result">
     <form class="sudoku-form" action="/sudokuSolve" method="post">
         <!-- Add hidden input fields for rows and columns -->
         <input type="hidden" name="rows" value="{{ 9 }}">
@@ -136,12 +161,24 @@ color: #fff;
         </table>
         <input class="submit-button" type="submit" value="Submit">
     </form>
-
+</div>
     {% endif %}
+
     </main>
     <footer>
         &copy; 2023 Word Puzzle Solver
     </footer>
+    <script>
+        document.getElementById('captureButton').addEventListener('click', function() {
+     html2canvas(document.querySelector('.result'), {
+       onrendered: function(canvas) {
+           var customName = 'Enigmascan_Solved_Sudoku'; // Specify your custom image name here
+           Canvas2Image.saveAsPNG(canvas, canvas.width, canvas.height, customName);
+       }
+     });
+   });
+               
+                   </script>
 </body>
 
 </html>

@@ -1,4 +1,6 @@
 /* Reset some default styles */
+
+
 * {
     margin: 0px;
     padding: 0px;
@@ -6,15 +8,21 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: rgb(54, 25, 105);
+  margin: 0;
+  padding: 0;
+  height: 180vh; /* Set a sufficient height for scrolling */
+  transition: background-color 0.5s; /* Smooth transition for background color */
 }
 
 /* Header styles */
 header {
-    background: linear-gradient(90deg, #000000 0%, #00828e 52%, #00828e 60%, #000000 100%);
+    /* background: linear-gradient(90deg, #005B41 0%, #008170 52%, #008170 60%, #005B41 100%); */
     color: #fff;
+    background-color: black;
     padding: 20px 0;
     text-align: center;
+    
     /* border-bottom: 2px solid #000000; */
 }
 
@@ -22,9 +30,14 @@ header {
 nav ul {
     list-style: none;
     margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    column-gap: 50px;
 }
 
 .nav-item {
+    font-family: 'Pixelify Sans', sans-serif;
+
     display: inline-block;
     margin-right: 20px;
 }
@@ -45,29 +58,27 @@ nav ul {
 }
 
 /* Header title styles */
-h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
-}
+
 
 .introd {
-    margin-top: 200px;
-    padding: 10px 30px 30px 30px;
-    background-color: #00000070;
-    border-radius: 50px;
+
+    /* padding: 10px 30px 30px 30px; */
+
+    /* border-radius: 50px; */
     text-align: center;
 }
 
-.introd h2 {
-    font-size: 80px;
+h1 {
+    font-family: 'Pixelify Sans', sans-serif;
+    margin-top: 120px;
+    font-size: 110px;
     font-weight: bold;
-    color: transparent;
     text-align: center;
-    background: linear-gradient(90deg, #ff6a00, #ffcc29, #f34d87, #a80077, #005ab5, #00a2ff, #3ce7bf, #00ff00, #ff6a00);
-    background-size: 200% 100%;
+    /* background: linear-gradient(90deg, #ff6a00, #ffcc29, #f34d87, #a80077, #005ab5, #00a2ff, #3ce7bf, #00ff00, #ff6a00); */
+    /* background-size: 200% 100%;
     -webkit-background-clip: text;
-    animation: effect 10s linear infinite;
-    margin-bottom: 20px;
+    animation: effect 10s linear infinite; */
+    color: beige;
 }
 
 @keyframes effect {
@@ -94,31 +105,32 @@ h1 {
     text-align: center;
 } */
 #intro {
-    height: 100vh;
+    height: 60vh;
     display: flex;
     align-items: center;
     color: #fff;
     flex-direction: column;
     text-align: center;
     position: relative;
-    background-image: url('./imgs/img_back_index_2.jpg') ;
+    /* background-image: url('./imgs/img_back_index_2.jpg') ; */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     /* transition: background 1s ease-in-out; */
 }
 .introd p{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Comfortaa', sans-serif;
     margin: 0px;
+    font-size: 25px;
 }
 
 /* Main content section styles */
 #puzzlesbtn {
-    height: 100vh;
+    height: 80vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    background: url('./imgs/pexels-ds-stories-9227482.jpg') center/cover no-repeat;
+    /* align-items: center; */
+    /* background: url('./imgs/pexels-ds-stories-9227482.jpg') center/cover no-repeat; */
     color: #ffffff;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -142,28 +154,50 @@ h1 {
 
 /* Adjust card styling as needed */
 .puzzle-card {
-    background-color: #1f1f1fa7;
+
     /* border: 3px solid #ddd; */
     border-radius: 10px;
     padding: 20px;
     margin: 20px;
     text-align: center;
-
+    height: 63vh;
     transition: transform 0.3s ease;
 }
+#puzzle-card-1{
+    border: 1px solid #ff6b00;
+}
+#puzzle-card-1:hover{
+    background-color: #ff6b00;
+    box-shadow: 0px 0px 80px 2px #ff6b00;
+}
+#puzzle-card-2{
+    border: 1px solid #146cf1;
+}
+#puzzle-card-2:hover{
+    background-color: #146cf1;
+    box-shadow: 0px 0px 80px 2px #146cf1;
+}
+#puzzle-card-3{
+    border: 1px solid #ed52cb;
+}
+#puzzle-card-3:hover{
+    background-color: #ed52cb;
+    box-shadow: 0px 0px 80px 2px #ed52cb;
+}
+
 .puzzle-card:hover {
     transform: scale(1.05); /* Enlarge the card on hover */
 }
 
 .puzzle-card h2 {
     font-size: 34px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Pixelify Sans', sans-serif;
 }
 
 .puzzle-card p {
     font-size: 16px;
     margin-bottom: 10px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Comfortaa', sans-serif;
 }
 
 /* button {
@@ -225,6 +259,8 @@ h1 {
 footer {
     text-align: center;
     padding: 30px;
-    background: linear-gradient(90deg, #000000 0%, #00828e 52%, #00828e 60%, #000000 100%);
+
+        /* background: linear-gradient(90deg, #005B41 0%, #008170 52%, #008170 60%, #005B41 100%); */
     color: #fff;
+    background-color: black;
 }

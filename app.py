@@ -6,8 +6,11 @@ from sudoku_ocr import SudokuOcr as sko
 from word_puz_ocr import WordOcr as wdo
 from solve_sudoku import SudokuSolver
 from solve_word import EnigmaSearch
+from flask_session import Session
 
 app = Flask(__name__)
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 app.secret_key = 'enigmascan2023'
 
 app.config['UPLOAD_FOLDER'] = 'EnigmaScan/static/uploads'
@@ -52,7 +55,7 @@ def sudokuSolve():
     image_path = 'EnigmaScan/static/uploads/cropped_puzzle.jpg'
     sudoku_solver = sko(image_path)
     sudoku_matrix = sudoku_solver.solve_sudoku()
-    # print(sudoku_matrix)
+
     if request.method == 'POST':
         matrix = []
 
@@ -68,13 +71,33 @@ def sudokuSolve():
         # Solve the Sudoku using the C++ program
         result_matrix = solver.solve(matrix)
         # Now, 'matrix' contains the data submitted from the form
-        # print(matrix)
+
         success=True
         return render_template('solvedSudoku.html', X=result_matrix, success=success)
 
     # For the initial GET request, render the template with your initial 'X' data
     return render_template('solvedSudoku.html', X=sudoku_matrix, success=success)
 
+def string_to_matrix(input_string):
+    # Split the input string by commas to get individual elements
+    elements = input_string.split(',')
+
+    # Extract the shape of the matrix
+    rows, cols = int(elements[0]), int(elements[1])
+
+    # Remove the shape elements from the list
+    elements = elements[2:]
+
+    # Initialize the 2D matrix with zeros
+    matrix = [['' for _ in range(cols)] for _ in range(rows)]
+
+    # Populate the matrix with the remaining elements
+    for i in range(rows):
+        for j in range(cols):
+            if elements:
+                matrix[i][j] = elements.pop(0)
+    
+    return matrix
 
 @app.route('/wordSolve', methods=['GET', 'POST'])
 def wordSolve():
@@ -92,8 +115,7 @@ def wordSolve():
                 matrix_row.append(cell_value)
             matrix.append(matrix_row)
 
-        # Now, 'matrix' contains the data submitted from the form
-        # print(matrix)
+
         success=True
         enigma_solver = EnigmaSearch()
         indexes = []
@@ -113,9 +135,17 @@ def wordSolve():
         return render_template('solvedWord.html', X=matrix, success=success, notfound=notfound, indexesToHighlight=found_indexes)
 
     # For the initial GET request, render the template with your initial 'X' data
-    word_matrix = request.args.get('word_matrix')
-    # print(word_matrix)
-    return render_template('solvedWord.html', X=word_matrix, success=success)
+    # word_matrix = request.args.get('word_matrix')
+
+    # Retrieve the flattened list
+    word_matrix_str = session.get('word_matrix')
+
+    if word_matrix_str is not None:
+        word_matrix = string_to_matrix(word_matrix_str)
+        
+        return render_template('solvedWord.html', X=word_matrix, success=success)
+    else:
+        return "Refresh the process from beginning"
 
 @app.route('/wordsearch', methods=['GET', 'POST'])
 def wordsearch():
@@ -131,7 +161,17 @@ def wordsearch():
             image_path = 'EnigmaScan/static/uploads/cropped_puzzle.jpg'
             word_ocr =wdo(image_path, int(number1), int(number2))
             word_matrix = word_ocr.solve_word()
-            return redirect(url_for('wordSolve', word_matrix=word_matrix))
+
+            # Assuming word_matrix is your 2D matrix
+            matrix_shape = (len(word_matrix), len(word_matrix[0]))
+
+            # Create a string with shape and elements separated by commas
+            word_matrix_str = f"{matrix_shape[0]},{matrix_shape[1]},{','.join(str(item) for row in word_matrix for item in row)}"
+            modified_string = word_matrix_str.replace(" ", "W")
+            session['word_matrix'] = modified_string
+
+            return redirect(url_for('wordSolve'))
+
         if 'file' not in request.files:
             statement = "No file part"
         else:
@@ -173,31 +213,6 @@ def save_cropped_image():
         f.write(cropped_image_bytes)
 
     return jsonify({'success': True, 'new_filename': new_filename})
-
-
-    # Convert the base64 encoded data to bytes
-
-
-# @app.route('/upload_image', methods=['POST'])
-# def upload_image():
-#     if 'file' not in request.files:
-#         return render_template('sudoku.html', success=False, statment = "No file part")
-
-#     file = request.files['file']
-#     if file.filename == '':
-#         return render_template('sudoku.html', success= False, statement = "No selected file")
-
-#     if file:
-#         filename = os.path.join(app.config['UPLOAD_FOLDER'], 'sudoku.png')
-#         file.save(filename)
-#         print(filename)
-#         return render_template('sudoku.html', success=True, image = filename)
-#     return render_template('sudoku.html', success= False, statement = "Upload Failed! Try Again")
-
-# def allowed_file(filename):
-#     allowed_extensions = {'jpg', 'jpeg', 'png', 'gif'}
-#     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
-
 
 
 @app.route('/crossword')
