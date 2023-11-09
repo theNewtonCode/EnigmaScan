@@ -9,10 +9,12 @@
 body {
     font-family: Arial, sans-serif;
     background-color: rgb(54, 25, 105);
-  margin: 0;
-  padding: 0;
-  height: 180vh; /* Set a sufficient height for scrolling */
-  transition: background-color 0.5s; /* Smooth transition for background color */
+    margin: 0;
+    padding: 0;
+    height: 180vh;
+    /* Set a sufficient height for scrolling */
+    transition: background-color 0.5s;
+    /* Smooth transition for background color */
 }
 
 /* Header styles */
@@ -20,9 +22,9 @@ header {
     /* background: linear-gradient(90deg, #005B41 0%, #008170 52%, #008170 60%, #005B41 100%); */
     color: #fff;
     background-color: black;
-    padding: 20px 0;
+    padding: 14px 0;
     text-align: center;
-    
+
     /* border-bottom: 2px solid #000000; */
 }
 
@@ -44,6 +46,7 @@ nav ul {
 
 .nav-item.active {
     font-weight: bold;
+    color: rgba(47, 255, 61, 0.845)
 }
 
 .nav-item a {
@@ -65,13 +68,15 @@ nav ul {
     /* padding: 10px 30px 30px 30px; */
 
     /* border-radius: 50px; */
+    margin-top: -10px;
     text-align: center;
+    color: #ffffffc1;
 }
 
 h1 {
     font-family: 'Pixelify Sans', sans-serif;
-    margin-top: 120px;
-    font-size: 110px;
+    margin-top: 130px;
+    font-size: 150px;
     font-weight: bold;
     text-align: center;
     /* background: linear-gradient(90deg, #ff6a00, #ffcc29, #f34d87, #a80077, #005ab5, #00a2ff, #3ce7bf, #00ff00, #ff6a00); */
@@ -91,7 +96,27 @@ h1 {
     }
 }
 
-    
+
+#roticon {
+    /* position: fixed; */
+    top: 50%;
+    left: 50%;
+    margin-top: 170px;
+    height: 150px;
+
+    animation: rotate 1s linear infinite;
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -1s);
+
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
 
 
 /* Hero section styles */
@@ -118,7 +143,8 @@ h1 {
     background-size: cover;
     /* transition: background 1s ease-in-out; */
 }
-.introd p{
+
+.introd p {
     font-family: 'Comfortaa', sans-serif;
     margin: 0px;
     font-size: 25px;
@@ -128,7 +154,8 @@ h1 {
 #puzzlesbtn {
     height: 80vh;
     display: flex;
-    justify-content: center;
+    justify-content: grid;
+    grid-template-columns: 33vw 33vw 33vw;
     /* align-items: center; */
     /* background: url('./imgs/pexels-ds-stories-9227482.jpg') center/cover no-repeat; */
     color: #ffffff;
@@ -142,12 +169,12 @@ h1 {
     justify-content: space-around;
     text-align: center;
     margin: 40px 0;
-    
+
 }
+
 .puzzle-card img {
-    margin-top: 10px;
-    width: 27vw;
-    height: 40vh;
+    margin: 30px auto;
+    width: 60%;
     margin-bottom: 10px;
     border-radius: 10px;
 }
@@ -156,49 +183,108 @@ h1 {
 .puzzle-card {
 
     /* border: 3px solid #ddd; */
+    width: 27vw;
     border-radius: 10px;
     padding: 20px;
     margin: 20px;
     text-align: center;
-    height: 63vh;
+    height: 60vh;
     transition: transform 0.3s ease;
+    /* display: grid;
+    justify-content: center; */
 }
-#puzzle-card-1{
+
+#puzzle-card-1 {
     border: 1px solid #ff6b00;
 }
-#puzzle-card-1:hover{
+
+#puzzle-card-1:hover {
     background-color: #ff6b00;
     box-shadow: 0px 0px 80px 2px #ff6b00;
 }
-#puzzle-card-2{
+
+#puzzle-card-2 {
     border: 1px solid #146cf1;
 }
-#puzzle-card-2:hover{
+
+#puzzle-card-2:hover {
     background-color: #146cf1;
     box-shadow: 0px 0px 80px 2px #146cf1;
 }
-#puzzle-card-3{
+
+#puzzle-card-3 {
     border: 1px solid #ed52cb;
 }
-#puzzle-card-3:hover{
+
+#puzzle-card-3:hover {
     background-color: #ed52cb;
     box-shadow: 0px 0px 80px 2px #ed52cb;
 }
 
-.puzzle-card:hover {
-    transform: scale(1.05); /* Enlarge the card on hover */
+.puzzle-card img {
+    display: none;
 }
 
-.puzzle-card h2 {
-    font-size: 34px;
-    font-family: 'Pixelify Sans', sans-serif;
-}
-
-.puzzle-card p {
+.cardp {
     font-size: 16px;
     margin-bottom: 10px;
     font-family: 'Comfortaa', sans-serif;
 }
+
+.cardp {
+    display: none;
+}
+
+.puzzle-card:hover {
+
+    transform: scale(1.05);
+    /* Enlarge the card on hover */
+}
+
+.cardh {
+    font-size: 60px;
+    font-family: 'Pixelify Sans', sans-serif;
+    margin: 40% 5% auto;
+}
+
+.puzzle-card:hover .cardimgs {
+    display: block;
+}
+
+.puzzle-card:hover .cardp {
+    display: block;
+}
+
+.puzzle-card:hover .cardh {
+    margin: auto;
+}
+
+.puzzle-card:hover #sudoku-button {
+    background-color: rgba(255, 255, 255, 0);
+    color: #ffffff;
+    opacity: 100%;
+    border-color: #ffffff;
+    margin-top: auto;
+}
+
+.puzzle-card:hover #crossword-button {
+    background-color: rgba(254, 195, 122, 0);
+    color: #ffffff;
+    opacity: 100%;
+    border-color: #ffffff;
+    margin-top: auto;
+}
+
+.puzzle-card:hover #word-puzzle-button {
+    background-color: rgba(254, 195, 122, 0);
+    color: #ffffff;
+    opacity: 100%;
+    border-color: #ffffff;
+    margin-top: auto;
+}
+
+
+
 
 /* button {
 
@@ -214,53 +300,72 @@ h1 {
 } 
 */
 
-    button {
-      align-self: center;
-      margin-top: 10px;
-      background-color: rgb(254, 195, 122);
-      background-image: none;
-      background-position: 0 90%;
-      background-repeat: repeat no-repeat;
-      background-size: 4px 3px;
-      border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
-      border-style: solid;
-      border-width: 2px;
-      box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
-      box-sizing: border-box;
-      color: #41403e;
-      cursor: pointer;
-      display: inline-block;
-      font-family: Neucha, sans-serif;
-      font-size: 1rem;
-      line-height: 23px;
-      outline: none;
-      padding: .75rem;
-      text-decoration: none;
-      transition: all 235ms ease-in-out;
-      border-bottom-left-radius: 15px 255px;
-      border-bottom-right-radius: 225px 15px;
-      border-top-left-radius: 255px 15px;
-      border-top-right-radius: 15px 225px;
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: manipulation;
-    }
-    
-    button:hover {
-      box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
-      transform: translate3d(0, 2px, 0);
-    }
-    
-    button:focus {
-      box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
-    }
+button {
+    align-self: center;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.11);
+    opacity: 40%;
+    background-image: none;
+    background-position: 0 90%;
+    background-repeat: repeat no-repeat;
+    background-size: 4px 3px;
+    border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+    box-sizing: border-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Neucha, sans-serif;
+    font-size: 1rem;
+    line-height: 23px;
+    outline: none;
+    padding: .75rem;
+    text-decoration: none;
+    transition: all 235ms ease-in-out;
+    border-bottom-left-radius: 15px 255px;
+    border-bottom-right-radius: 225px 15px;
+    border-top-left-radius: 255px 15px;
+    border-top-right-radius: 15px 225px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 170px;
+    margin-bottom: 40%;
+    margin-top: 15px;
+}
 
+button:hover {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+    transform: translate3d(0, 2px, 0);
+}
+
+button:focus {
+    box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+#sudoku-button {
+    border-color: #ff6b00;
+    color: #ff6b00;
+}
+
+#crossword-button {
+    border-color: #146cf1;
+    color: #146cf1;
+}
+
+#word-puzzle-button {
+    border-color: #ed52cb;
+    color: #ed52cb;
+}
 
 footer {
     text-align: center;
     padding: 30px;
 
-        /* background: linear-gradient(90deg, #005B41 0%, #008170 52%, #008170 60%, #005B41 100%); */
+    /* background: linear-gradient(90deg, #005B41 0%, #008170 52%, #008170 60%, #005B41 100%); */
     color: #fff;
+    opacity: 70%;
     background-color: black;
 }

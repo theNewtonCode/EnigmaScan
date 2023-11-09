@@ -18,6 +18,7 @@
                 <li class="nav-item"><a href="{{url_for('sudoku')}}">Sudoku</a></li>
                 <li class="nav-item"><a href="{{url_for('crossword')}}">Crossword</a></li>
                 <li class="nav-item"><a href="{{url_for('wordsearch')}}">Word Puzzle</a></li>
+                <li class="nav-item"><a href="">About Us</a></li>
             </ul>
         </nav>
     </header>
@@ -25,29 +26,30 @@
         <h1>ENIGMASCAN</h1>
         <section class="hero" id="intro">
             <div class="introd">
-                
                 <p>Your smart and efficient puzzle solver!</p>
             </div>
-
+            <div id="roticon">
+<img src="{{ url_for('static', filename='imgs/roticon.png') }}" alt="icon" height="100%">
+              </svg>
         </section>
         <section class="puzzle-buttons" id="puzzlesbtn">
             <div class="puzzle-card" id="puzzle-card-1" >
-                <h2>Sudoku</h2>
-                <img src="{{ url_for('static', filename='imgs/sudko.jpeg') }}">
-                <p>Solve classic Sudoku puzzles and test your logic skills.</p>
-                <button id="sudoku-button">Solve Sudoku</button>
+                <h2 class="cardh">Sudoku</h2>
+                <img class="cardimgs" src="{{ url_for('static', filename='imgs/sdkpng.png') }}">
+                <p class="cardp">Solve classic Sudoku puzzles and test your logic skills.</p>
+                <button id="sudoku-button">Solve Matrix!</button>
             </div>
             <div class="puzzle-card" id="puzzle-card-2">
-                <h2>Crossword</h2>
-                <img src="{{ url_for('static', filename='imgs/crossw.jpg') }}">
-                <p>Crosswords challenge your vocabulary and knowledge.</p>
-                <button id="crossword-button">Solve Crossword</button>
+                <h2 class="cardh">Crossword</h2>
+                <img class="cardimgs" src="{{ url_for('static', filename='imgs/crosspng.png') }}">
+                <p class="cardp">Crosswords challenge your vocabulary and knowledge.</p>
+                <button id="crossword-button">Find Clues!</button>
             </div>
             <div class="puzzle-card" id="puzzle-card-3">
-                <h2>Word Puzzle</h2>
-                <img src="{{ url_for('static', filename='imgs/words.jpg') }}">
-                <p>Word Puzzle develop your strategical thinking.</p>
-                <button id="word-puzzle-button">Solve Word Puzzle</button>
+                <h2 class="cardh">Word Puzzle</h2>
+                <img class="cardimgs" src="{{ url_for('static', filename='imgs/wordpng.png') }}">
+                <p class="cardp">Word Puzzle develop your strategical thinking.</p>
+                <button id="word-puzzle-button">Search Words!</button>
             </div>
         </section>
     </main>
@@ -92,6 +94,16 @@ window.addEventListener('scroll', function() {
   document.body.style.backgroundColor = `rgb(${interpolatedColor.join(',')})`;
 });
 
+window.addEventListener(
+  "scroll",
+  () => {
+    document.body.style.setProperty(
+      "--scroll",
+      window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
+    );
+  },
+  false
+);
     </script>
 </body>
 </html>
