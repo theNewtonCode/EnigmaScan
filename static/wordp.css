@@ -1,199 +1,235 @@
-/* Reset some default styles */
-body, h1, h2, h3, p, ul, li {
-    margin: 0;
-    padding: 0;
-    }
-    
-    body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5; /* Light gray background */
-    }
- 
-    /* Header styles */
-    header {
-    background: linear-gradient(90deg, #960041, #e7609b); /* Gradient background */
-    color: #fff;
-    padding: 20px 0; /* Added top and bottom padding for spacing */
-    text-align: center;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.759)828; /* Add a white border at the bottom */
-    }
-    
-    /* Navigation styles */
-    nav ul {
-    list-style: none;
-    margin-top: 10px; /* Add spacing between the header and navigation */
-    }
-    
-    .nav-item {
-    display: inline-block;
-    margin-right: 20px;
-    }
-    
-    .nav-item.active {
-    font-weight: bold;
-    }
-    
-    /* Link styles */
-    .nav-item a {
-    text-decoration: none;
-    color: #c0abab;
-    font-size: 16px;
-    transition: color 0.3s ease; /* Smooth color transition on hover */
-    }
-    
-    .nav-item a:hover {
-    color: #ffe207; /* Change color on hover */
-    }
-    
-    /* Header title styles */
-    h1 {
-    font-size: 28px; /* Increase the font size for the header title */
-    margin-bottom: 10px; /* Add spacing between the title and navigation */
-    }
-    
-    
-    main {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 90px);
-    }
-    
-    form{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -250px;
-    width: 500px;
-    height: 200px;
-    border: 4px dashed #65012c;
-    }
-    form p{
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    line-height: 170px;
-    color: #960041;
-    font-family: Arial;
-    }
-    .file-input{
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    outline: none;
-    opacity: 0;
-    }
-    /* Base button styles */
-    form button {
-    font-family: Arial, sans-serif; /* Change the font to Arial or another preferred font */
-    font-size: 16px; /* Increase the font size for better readability */
-    color: #fff;
-    background: #e7609b;
-    border: none;
-    width: 158px;
-    height: 35px;
-    border-radius: 4px;
-    border-bottom: 4px solid #960041;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    outline: none;
-    cursor: pointer;
-    }
-    
-    /* Hover styles */
-    form button:hover {
-    background: #960041;
-    transform: translateY(-2px); /* Add a slight upward lift on hover */
-    }
-    
-    /* Active styles (when the button is clicked) */
-    form button:active {
-    transform: translateY(2px); /* Add a slight downward press when clicked */
-    }
-    
-    /* Disabled styles */
-    form button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    }
-    
-    .buttons_form {
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(2, 250px); /* Use repeat for two columns */
-    justify-items: center;
-    }
-    .file-input.dragover {
-    background-color: #939600;
-    color: #b20808;
-    }
-    
-    #save-cropped-image{
-    font-family: Arial, sans-serif; /* Change the font to Arial or another preferred font */
-    font-size: 16px; /* Increase the font size for better readability */
-    color: #fff;
-    background: #e7609b;
-    border: none;
-    width: 258px;
-    height: 35px;
-    border-radius: 4px;
-    border-bottom: 4px solid #960041;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    outline: none;
-    cursor: pointer;
-    margin-top: 50px;
-    
-    }
-    
-    /* Modal styles */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 10%;
-        top: 10%;
-        width: 80%;
-        height: 80%;
-        background-color: rgba(255, 255, 255, 0.9);
-        overflow:scroll;
-        box-shadow: 0 4px 8px 0 rgba(57, 56, 56, 0.2);;
-      }
-      
-      .modal-content {
-        text-align: center;
-        margin: 10% auto;
-        background-color: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 4px 8px 0 rgba(76, 75, 75, 0.2);
-        max-width: 80%;
-      }
-      
-      .close {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 10px;
-        font-size: 24px;
-        cursor: pointer;
-        color: white;
-      }
-      .modal.hidden {
-        display: none;
-      }
-      
-      .input-box {
-        width: 300px;
-        padding: 10px;
-        border: 2px solid #000000;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-    
-    footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #e7609b;;
-    color: #fff;
-    }
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: black;
+}
+
+
+header {
+  background: linear-gradient(90deg, #ed52cb, #35002a);
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ed52cb;
+  box-shadow: 0px 0px 40px 1px #ed52cb;
+}
+
+
+nav ul {
+  list-style: none;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  column-gap: 50px;
+  align-items: center;
+}
+
+.nav-item {
+  font-family: 'Pixelify Sans', sans-serif;
+
+  display: inline-block;
+}
+
+.nav-item.active {
+  font-weight: bold;
+}
+
+
+.nav-item a {
+  text-decoration: none;
+  color: #c0abab;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-item a:hover {
+  color: #ffe207;
+}
+
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+
+main {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 90px);
+}
+
+form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -250px;
+  width: 500px;
+  height: 200px;
+  border: 7px dashed #ffffff2c;
+}
+
+form p {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 170px;
+  color: #ffffff3e;
+  font-family: 'Comfortaa', sans-serif;
+}
+
+.file-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+}
+
+form button {
+  font-family: 'Comfortaa', sans-serif;
+
+
+  font-size: 16px;
+  color: #fff;
+  background: transparent;
+  border: none;
+  width: 138px;
+  height: 35px;
+  border-radius: 4px;
+  border: 1px solid #ed52cb;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px 1px #ed52cb;
+
+}
+
+
+form button:hover {
+  box-shadow: 0px 0px 60px 1px #ed52cb;
+  transform: scale(1.05);
+
+  background: #ed52cb;
+}
+
+
+form button:active {
+  transform: translateY(2px);
+}
+
+
+form button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.buttons_form {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 250px);
+  justify-items: center;
+}
+
+.file-input.dragover {
+  background-color: #939600;
+  color: #b20808;
+}
+
+#save-cropped-image {
+  font-family: 'Pixelify Sans', sans-serif;
+
+  font-size: 16px;
+  color: #fff;
+  background: #ed52cb;
+  border: none;
+  width: 188px;
+  height: 35px;
+  border-radius: 4px;
+  border: 1px solid #ed52cb;
+  outline: none;
+  cursor: pointer;
+  margin-top: 50px;
+
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 10%;
+  top: 10%;
+  width: 80%;
+  height: 80%;
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: 0px 0px 40px 1px #ed52cb;
+  overflow: scroll;
+}
+
+.modal-content {
+  text-align: center;
+  margin: 10% auto;
+  background-color: rgba(0, 0, 0, 0.9);
+  max-width: 80%;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.input-box {
+  width: 300px;
+  padding: 10px;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#number1:hover {
+  box-shadow: 0px 0px 40px 1px #ed52cb;
+
+}
+
+#number2:hover {
+  box-shadow: 0px 0px 40px 1px #ed52cb;
+
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background: linear-gradient(90deg, #ed52cb, #35002a);
+
+
+  border-top: 1px solid #ed52cb;
+
+  color: rgba(255, 255, 255, 0.788);
+  font-family: 'Comfortaa', sans-serif;
+
+}

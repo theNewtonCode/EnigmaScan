@@ -6,35 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>wordpuzzle</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
     <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
     <style>
-                *{
+        * {
             margin: 0px;
             padding: 0px;
         }
+
+        body {
+            background-color: black;
+        }
+
         main {
-
-            height: 90vh;
-
-        }
-        .result{
-            display: flex;
-            align-items: center;
-            margin: 0;
             font-family: Arial, sans-serif;
-            /* background-color: #888888ab; */
+            background-color: black;
+            display: flex;
             justify-content: center;
+            align-items: center;
+            height: 90vh;
+            margin: 0;
         }
+
 
         .wordsearch-form {
-            background-color: #fff;
-            border: 1px solid #ccc;
+            background-color: rgba(0, 0, 0, 0.982);
+            border: 1px solid #ed52cb;
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 20px 1px #ed52cb;
         }
 
         table {
@@ -49,42 +52,76 @@
             font-size: 18px;
             border: 1px solid #ccc;
         }
-        td.highlighted {
-    background-color: yellow;
-}
+
+        td.highlighted input {
+            background-color: rgb(0 255 198 / 51%);
+        }
+
         input[type="text"] {
-            width: 90%;
-            height: 90%;
-            border: none;
-            font-size: 18px;
+            width: 96%;
+            height: 96%;
+            font-size: 25px;
             text-align: center;
+            background-color: black;
+            color: #ffffff9c;
         }
 
         .submit-button,
         .back-button {
             display: block;
-            width: 100%;
-            background-color: #e7609b;
+            font-family: 'Comfortaa', sans-serif;
+
+            margin: auto;
+            margin-top: 20px;
+            width: 130px;
             color: #fff;
             padding: 10px;
             border: none;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 20px;
             cursor: pointer;
-            margin-top: 20px;
-        }
-        #captureButton {
-            margin: 5vh auto;
-            margin-bottom: 8vh;
-            width: 15%;
-            background-color: #000000;
-
+            background-color: #ed52cb1c;
+            color: #ffffffbd;
+            border-radius: 4px;
+            border: 1px solid #ed52cb;
+            cursor: pointer;
         }
 
-        .submit-button:hover,
+        .submit-button:hover {
+            background-color: #ed52cb;
+
+
+            transform: scale(1.05);
+        }
+
+        .back-button {
+            width: 240px;
+        }
+
         .back-button:hover {
-            background-color: #000000;
+            background-color: #ed52cb;
+
+
+            transform: scale(1.05);
         }
+
+        #captureButton:hover {
+            background-color: #ed52cb;
+
+
+            transform: scale(1.05);
+        }
+
+        #captureButton {
+            margin: 12vh auto auto auto;
+            margin-bottom: 8vh;
+            width: 250px;
+            margin: -80px;
+            background-color: #ed52cb1c;
+
+
+        }
+
 
         form a {
             text-decoration: none;
@@ -93,9 +130,15 @@
 
         footer {
             text-align: center;
-            padding: 30px;
-            background-color: #e7609b;
-            color: #fff;
+            padding: 20px 0px 61px 0px;
+            background: linear-gradient(90deg, #ed52cb, #35002a);
+            box-shadow: 0px 0px 40px 1px #ed52cb;
+            border-top: 1px solid #ed52cb;
+
+            color: rgba(255, 255, 255, 0.788);
+
+            font-family: 'Comfortaa', sans-serif;
+
         }
     </style>
 </head>
@@ -103,12 +146,28 @@
 <body>
     <main>
         {% if success %}
-        <button class="back-button" id="captureButton">Download as Image</button>
+        <style>
+            main {
+                display: grid;
+                justify-content: center;
+                grid-template-columns: 70% 30%;
+            }
+
+            .wordsearch-form {
+                justify-content: center;
+                display: grid;
+            }
+
+            .result {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
         <div class="result">
-        <form class="wordsearch-form" action="/wordSolve" method="post" id="myForm">
-            <h1
-                style="font-size: 24px; color: #0a58ad; text-align: center; margin-top: 10px; margin-bottom: 20px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
-                Here's your solved puzzle!</h1>
+            <form class="wordsearch-form" action="/wordSolve" method="post" id="myForm">
+                <h1
+                    style="font-size: 24px; color: #ffffffaf; text-align: center; margin-top: 10px; margin-bottom: 20px;             font-family: 'Comfortaa', sans-serif;">
+                    Here's your solved puzzle!</h1>
 
                 <table>
                     <tbody>
@@ -116,8 +175,9 @@
                         {% for row in range(X|length) %}
                         <tr>
                             {% for col in range(X[0]|length) %}
-                            <td {% if [row, col] in indexesToHighlight %}class="highlighted"{% endif %}>
-                                <input type="text" name="cell_{{ row }}_{{ col }}" value="{{ X[row][col] }}" maxlength="1">
+                            <td {% if [row, col] in indexesToHighlight %}class="highlighted" {% endif %}>
+                                <input type="text" name="cell_{{ row }}_{{ col }}" value="{{ X[row][col] }}"
+                                    maxlength="1">
                             </td>
                             {% endfor %}
                         </tr>
@@ -128,19 +188,21 @@
                 {% if notfound %}
                 <div class="elements-list" style="font-size: 18px;
                 font-weight: bold;
-                color: #373737; /* Change the color to your desired decoration color */ /* Add an underline decoration */
-                border: 2px solid #545454; /* Add a 1px thin border with a black color */
+                color: #373737;  
+                border: 2px solid #545454; 
     padding: 5px; ">
                     <h6>Words Not Found: </h6>
                     <p>{{ notfound|join(', ') }}</p>
                 </div>
-        {% endif %}
-            <a href="/wordsearch"><button class="back-button" type="button"><i class="fas fa-home"></i>                Back to Home</button></a>
-        </form>
-    </div>
-        
+
+                {% endif %}
+                <a href="/wordsearch"><button class="back-button" type="button"><i class="fas fa-home"></i> Back to
+                        Home</button></a>
+            </form>
+
+        </div>
+        <button class="back-button" id="captureButton">Download as Image</button>
         {% else %}
-        <div class="result">
 
         <form class="wordsearch-form" action="/wordSolve" method="post">
             <!-- Add hidden input fields for rows and columns -->
@@ -169,7 +231,6 @@
             </table>
             <input class="submit-button" type="submit" value="Submit">
         </form>
-</div>
         {% endif %}
     </main>
     <footer>
@@ -177,16 +238,16 @@
     </footer>
 
     <script>
-        document.getElementById('captureButton').addEventListener('click', function() {
-     html2canvas(document.querySelector('.result'), {
-       onrendered: function(canvas) {
-           var customName = 'Enigmascan_Solved_WordPuzzle'; // Specify your custom image name here
-           Canvas2Image.saveAsPNG(canvas, canvas.width, canvas.height, customName);
-       }
-     });
-   });
-               
-                   </script>
+        document.getElementById('captureButton').addEventListener('click', function () {
+            html2canvas(document.querySelector('.result'), {
+                onrendered: function (canvas) {
+                    var customName = 'Enigmascan_Solved_WordPuzzle'; // Specify your custom image name here
+                    Canvas2Image.saveAsPNG(canvas, canvas.width, canvas.height, customName);
+                }
+            });
+        });
+
+    </script>
 
 </body>
 

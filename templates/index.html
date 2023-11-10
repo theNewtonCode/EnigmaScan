@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
 
 
 </head>
+
 <body>
     <header>
         <nav>
@@ -29,11 +31,11 @@
                 <p>Your smart and efficient puzzle solver!</p>
             </div>
             <div id="roticon">
-<img src="{{ url_for('static', filename='imgs/roticon.png') }}" alt="icon" height="100%">
-              </svg>
+                <img src="{{ url_for('static', filename='imgs/roticon.png') }}" alt="icon" height="100%">
+                </svg>
         </section>
         <section class="puzzle-buttons" id="puzzlesbtn">
-            <div class="puzzle-card" id="puzzle-card-1" >
+            <div class="puzzle-card" id="puzzle-card-1">
                 <h2 class="cardh">Sudoku</h2>
                 <img class="cardimgs" src="{{ url_for('static', filename='imgs/sdkpng.png') }}">
                 <p class="cardp">Solve classic Sudoku puzzles and test your logic skills.</p>
@@ -79,31 +81,32 @@
             window.location.href = '{{ url_for("wordsearch") }}';
         });
 
-window.addEventListener('scroll', function() {
-  // Calculate the scroll position as a percentage of the page height
-  const scrollPosition = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-  
-  // Map the scroll position to a color between light and dark
-  const lightColor = [54, 25, 105]; // Light color (e.g., white)
-  const darkColor = [0, 0, 0];       // Dark color (e.g., black)
-  const interpolatedColor = lightColor.map((channel, index) => {
-    return Math.round(channel + (darkColor[index] - channel) * (scrollPosition / 100));
-  });
-  
-  // Set the background color using RGB values
-  document.body.style.backgroundColor = `rgb(${interpolatedColor.join(',')})`;
-});
+        window.addEventListener('scroll', function () {
+            // Calculate the scroll position as a percentage of the page height
+            const scrollPosition = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
 
-window.addEventListener(
-  "scroll",
-  () => {
-    document.body.style.setProperty(
-      "--scroll",
-      window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
-    );
-  },
-  false
-);
+            // Map the scroll position to a color between light and dark
+            const lightColor = [54, 25, 105]; // Light color (e.g., white)
+            const darkColor = [0, 0, 0];       // Dark color (e.g., black)
+            const interpolatedColor = lightColor.map((channel, index) => {
+                return Math.round(channel + (darkColor[index] - channel) * (scrollPosition / 100));
+            });
+
+            // Set the background color using RGB values
+            document.body.style.backgroundColor = `rgb(${interpolatedColor.join(',')})`;
+        });
+
+        window.addEventListener(
+            "scroll",
+            () => {
+                document.body.style.setProperty(
+                    "--scroll",
+                    window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
+                );
+            },
+            false
+        );
     </script>
 </body>
+
 </html>

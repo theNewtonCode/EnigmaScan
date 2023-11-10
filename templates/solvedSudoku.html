@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sudoku</title>
     <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     
     <style>
@@ -15,7 +17,7 @@
         }
         main {
             font-family: Arial, sans-serif;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: black;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,11 +26,11 @@
         }
 
         .sudoku-form {
-            background-color: rgba(241, 241, 241, 0.982);
-            border: 4px solid #ccc;
+            background-color: rgba(0, 0, 0, 0.982);
+            border: 1px solid  #ff6b00; 
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 20px 1px #ff6b00;
         }
 
         table {
@@ -41,44 +43,61 @@
             height: 50px;
             text-align: center;
             font-size: 18px;
-            border: 3px solid #ccc;
+ 
+            color: white;
         }
 
         /* Thick border style for 3x3 grid */
         td:nth-child(3n),
         td:nth-child(6n) {
-            border-right: 3px solid #000;
+            border-right: 3px solid #ffffff;
         }
 
         tr:nth-child(3n) td {
-            border-bottom: 3px solid #000;
+            border-bottom: 3px solid #ffffff;
         }
 
         input[type="text"] {
-            width: 90%;
-            height: 90%;
-            font-size: 25px;
-            text-align: center;
+            width: 96%;
+    height: 96%;
+    font-size: 25px;
+    text-align: center;
+    background-color: black;
+    color: #ffffff9c;
         }
 
         .submit-button,
         .back-button {
             display: block;
+            font-family: 'Comfortaa', sans-serif;
 
             margin: auto;
             margin-top: 20px;
-            width: 50%;
-            background-color: rgb(0, 0, 0);
+            width: 40%;
             color: #fff;
             padding: 10px;
             border: none;
             border-radius: 5px;
             font-size: 20px;
             cursor: pointer;
+            background-color: #ff6b0038;
+    color: #ffffffbd;
+border-radius: 4px;
+border: 1px solid #ff6b00; /* Add a white border at the bottom */
+cursor: pointer;
         }
 
         .submit-button:hover {
-            background-color: rgb(17, 161, 53);
+background-color: #ff6b00;
+
+            /* box-shadow: 0px 0px 60px 1px #ff6b00; */
+            transform: scale(1.05);
+        }
+        .back-button:hover {
+background-color: #ff6b00;
+
+            /* box-shadow: 0px 0px 60px 1px #ff6b00; */
+            transform: scale(1.05);
         }
 
         form a {
@@ -87,16 +106,24 @@
         footer {
 text-align: center;
 padding: 30px;
-background-color: #009688;
+background: linear-gradient(90deg, #ff6b00, #271102); /* Gradient background */
+
+border-top: 1px solid #ff6b00; /* Add a white border at the bottom */
 color: #fff;
+font-family: 'Comfortaa', sans-serif;
+
 }
 
 #captureButton {
     margin-top: 40vh;
-            width: 250px;
-            background-color: #000000;
-
-        }
+    width: 250px;
+    background-color: #ff6b0038;
+    color: #ffffffbd;
+    margin-left: -80px;
+}
+#captureButton:hover{
+background-color: #ff6b00;
+}
     </style>
 </head>
 
@@ -108,22 +135,26 @@ color: #fff;
         main{
             display: grid;
             justify-content: center;
-            grid-template-columns: 40% 60%;
+            grid-template-columns: 70% 30%;
         }
         .sudoku-form{
-            width: 80%;
+            width: 500px;
             justify-content: center;
             display: grid;
         }
+        .result{
+            display: flex;
+    justify-content: center;
+        }
+        
 
     </style>
-    <button class="back-button" id="captureButton">Download as Image</button>
         
     <div class="result">
     <form class="sudoku-form" action="/sudokuSolve" method="post">
         <table>
             <h1
-                style="font-size: 24px; color: #000000; text-align: center; margin-top: 10px; margin-bottom: 20px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                style="font-size: 24px; color: #ffffff; text-align: center; margin-top: 10px; margin-bottom: 20px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
                 Here's your solved puzzle!</h1>
             <tbody>
                 <!-- Create a dynamic Sudoku-like table with pre-populated values -->
@@ -140,6 +171,7 @@ color: #fff;
     </form>
 
 </div>
+<button class="back-button" id="captureButton">Download as Image</button>
     {% else %}
     <div class="result">
     <form class="sudoku-form" action="/sudokuSolve" method="post">
@@ -166,7 +198,7 @@ color: #fff;
 
     </main>
     <footer>
-        &copy; 2023 Word Puzzle Solver
+        &copy; 2023 EnigmaScan Sudoku Solver
     </footer>
     <script>
         document.getElementById('captureButton').addEventListener('click', function() {
