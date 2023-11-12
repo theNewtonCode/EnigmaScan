@@ -1,213 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EnigmaScan Crossword</title>
-    <link rel="stylesheet" href="crossword.css">
-</head>
-<body>
+    <link rel="stylesheet" href="{{url_for('static', filename='cross.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+    <script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <style>
         /* Reset some default styles */
-body, h1, h2, h3, p, ul, li {
-    margin: 0;
-    padding: 0;
-}
+        body, h1, h2, h3, p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5; /* Light gray background */
-}
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000000; /* Light gray background */
+        }
 
-/* Header styles */
-header {
-    background: linear-gradient(90deg, #460096 0%, #0f68e3 100%); /* Gradient background */
-    color: #fff;
-    padding: 20px 0; /* Added top and bottom padding for spacing */
-    text-align: center;
-    border-bottom: 2px solid #fff; /* Add a white border at the bottom */
-}
+        /* Header styles */
+        header {
+            background: linear-gradient(90deg, #146cf1 0%, #002354 100%); /* Gradient background */
+            color: #fff;
+            text-align: center;
+            border-bottom: 1px solid #146cf1;
+            color: #fff;
+  padding: 15px;
 
-/* Navigation styles */
-nav ul {
-    list-style: none;
-    margin-top: 10px; /* Add spacing between the header and navigation */
-}
-
-.nav-item {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-.nav-item.active {
-    font-weight: bold;
-}
-
-/* Link styles */
-.nav-item a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 16px;
-    transition: color 0.3s ease; /* Smooth color transition on hover */
-}
-
-.nav-item a:hover {
-    color: #ffc107; /* Change color on hover */
-}
-
-/* Header title styles */
-h1 {
-    font-size: 28px; /* Increase the font size for the header title */
-    margin-bottom: 10px; /* Add spacing between the title and navigation */
-}
-
-
-main {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 90px);
-}
-form{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -100px;
-  margin-left: -250px;
-  width: 500px;
-  height: 200px;
-  border: 4px dashed #1aff57;
-}
-form p{
-  width: 100%;
-  height: 100%;
   text-align: center;
-  line-height: 170px;
-  color: #1aff57;
-  font-family: Arial;
-}
-form input{
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  outline: none;
-  opacity: 0;
-}
-/* Base button styles */
-form button {
-    font-family: Arial, sans-serif; /* Change the font to Arial or another preferred font */
-    font-size: 16px; /* Increase the font size for better readability */
-    color: #fff;
-    background: #0f68e3;
-    border: none;
-    width: 158px;
-    height: 35px;
-    border-radius: 4px;
-    border-bottom: 4px solid #460096;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    outline: none;
-    cursor: pointer;
-}
+box-shadow: 0px 0px 40px 1px #146cf1;
 
-/* Hover styles */
-form button:hover {
-    background: #460096;
-    transform: translateY(-2px); /* Add a slight upward lift on hover */
-}
+        }
 
-/* Active styles (when the button is clicked) */
-form button:active {
-    transform: translateY(2px); /* Add a slight downward press when clicked */
-}
+        /* Navigation styles */
+        nav ul {
+  margin-top: 10px;
 
-/* Disabled styles */
-form button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-}
+            list-style: none;
+  display: flex;
+  justify-content: center;
+  column-gap: 50px;
+  align-items: center;
+        }
 
-.buttons_form {
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: repeat(2, 250px); /* Use repeat for two columns */
-    justify-items: center;
-}
-form input.dragover {
-        background-color: #460096;
-        color: #b20808;
-    }
+        .nav-item {
+  font-family: 'Pixelify Sans', sans-serif;
+
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .nav-item.active {
+            font-weight: bold;
+        }
+
+        /* Link styles */
+        .nav-item a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            transition: color 0.3s ease; /* Smooth color transition on hover */
+        }
+
+        .nav-item a:hover {
+            color: #ffc107; /* Change color on hover */
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
+            margin-bottom: 10vh;
+        }
+
+        footer {
+            text-align: center;
+  padding: 10px;
+  background: linear-gradient(90deg, #146cf1 0%, #002354 100%); /* Gradient background */
 
 
-.puzzle-solution {
+  border-top: 1px solid #146cf1;
+
+  color: rgba(255, 255, 255, 0.788);
+  font-family: 'Comfortaa', sans-serif;
+        }
+
+        h1 {
+            color: white;
+            font-family: 'Pixelify Sans', sans-serif;
+
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+
+        input {
+            padding: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #146cf1;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            width: 300px;
+            font-family: 'Comfortaa', sans-serif;
+        }
+
+        .submit {
+            font-family: 'Comfortaa', sans-serif;
+
+
+font-size: 16px;
+color: #fff;
+background: transparent;
+border: none;
+width: 138px;
+height: 35px;
+border-radius: 4px;
+border: 1px solid #146cf1;
+transition: transform 0.2s ease, background-color 0.2s ease;
+outline: none;
+cursor: pointer;
+box-shadow: 0px 0px 5px 1px #146cf1;
+opacity: 70%;
+        }
+
+        .submit:hover {
+  box-shadow: 0px 0px 80px 2px #146cf1;
+  transform: scale(1.05);
+  opacity: 100%;
+
+  background: #146cf1;
 }
 
-footer {
+        .result {
+            margin-top: 50px;
     text-align: center;
-    padding: 10px;
-    background-color: #460096;
-    color: #fff;
+    display: grid;
+    justify-content: center;
+    border: 1px solid blue;
+    width: 60%;
+    margin-bottom: 50px;
+    font-family: 'Comfortaa', sans-serif;
+  box-shadow: 0px 0px 40px 2px #146cf1;
+
 }
 
+.result h2 {
+    margin: 30px;
+    color: rgba(255, 255, 255, 0.735);
+    margin-bottom: 10px;
+}
+
+
+.result p {
+    width: 80%; /* Set a fixed width for consistent dimensions */
+    margin: 10px auto;
+    padding: 10px;
+    border: 2px solid #146cf1;
+    border-radius: 5px;
+    background-color: #333;
+    box-sizing: border-box; /* Include padding and border in the total width */
+    color: #fff;
+}
+input:hover{
+
+    transform: scale(1.05);
+  box-shadow: 0px 0px 60px 1px #146cf1;
+}
+a{
+    text-decoration: none;
+}
+.back-button{
+    display: block;
+            font-family: 'Comfortaa', sans-serif;
+
+            margin: auto;
+            margin-bottom: 20px;
+            width: 250px;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #146cf1;
+    color: #ffffffbd;
+border-radius: 4px;
+border: 1px solid #146cf1; /* Add a white border at the bottom */
+cursor: pointer;
+}
+
+strong{
+    color: white;
+}
     </style>
+</head>
+
+<body>
     <header>
-        <h1>EnigmaScan Crossword</h1>
         <nav>
             <ul>
-                <li class="nav-item"><a href="index.html">Home</a></li>
-                <li class="nav-item"><a href="Sudoku.html">Sudoku</a></li>
-                <li class="nav-item active">Crossword</li>
-                <li class="nav-item"><a href="wordpuzzle.html">Word Puzzle</a></li>
-            </ul>
+                <li class="nav-item"><a href="{{url_for('index')}}">Home</a></li>
+                <li class="nav-item "><a href="{{url_for('sudoku')}}">Sudoku</a></li>
+                <li class="nav-item active"><a href="">Crossword</a></li>
+                <li class="nav-item "><a href="{{url_for('wordsearch')}}">Word Puzzle</a></li>
+              </ul>
         </nav>
     </header>
     <main>
-        <form action="upload.php" method="POST">
-            <!-- Hidden input to trigger file selection dialog -->
-            <input type="file" name="uploaded_files[]" id="file-input" multiple style="display: none;">
-            <div class="drop-area" id="drop-area">
-                <p>Drag your files here or click in this area.</p>
-            </div>
-            <br><br>
-            <div class="buttons_form">
-                <button type="button">Crop</button>
-                <button type="submit">Proceed</button>
-            </div>
-        </form>
-            <div class="puzzle-solution">
-            </div>
+        {% if result %}
+
+
+
+<div class="result">
+    <h2>Suitable Words:</h2>
+    
+    <div>
+        <strong>Highly Likely:</strong>
+        {% if result.list1%}
+            <p>{{ result.list1| join(', ') }}</p>
+        {% else %}
+            <p>No words</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <strong>Likely:</strong>
+        {% if result.list2 %}
+            <p>{{ result.list2 | join(', ') }}</p>
+        {% else %}
+            <p>No words</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <strong>Less Likely:</strong>
+        {% if result.list3 %}
+            <p>{{ result.list3 | join(', ') }}</p>
+        {% else %}
+            <p>No words</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <strong>Least Likely:</strong>
+        {% if result.list4 %}
+            <p>{{ result.list4 | join(', ') }}</p>
+        {% else %}
+            <p>No words</p>
+        {% endif %}
+    </div>
+</div>
+<a href="/crossword"><button class="back-button" type="button"><i class="fas fa-home"></i> Back to
+    Home</button></a>
+<button class="back-button" id="captureButton">Download as Image</button>
+{% else %}
+<h1>EnigmaScan Crossword</h1>
+<form method="post" action="{{url_for('crossword')}}">
+
+    <input type="number" id="number" name="number" placeholder="Enter length of the word" required>
+    <input type="text" id="string1" name="string1" placeholder="Enter the known letters" required>
+
+    <input type="text" id="string2" name="string2" placeholder="Enter the letters' positions" required>
+
+    <button type="submit" class="submit">Submit</button>
+</form>
+
+
+        {% endif %}
 
     </main>
     <footer>
-        &copy; 2023 Sudoku Solver
+        &copy; 2023 EnigmaScan Crossword
     </footer>
-    <script src="sudoku.js"></script>
     <script>
-// JavaScript to handle drag and drop functionality
-const dropArea = document.getElementById('drop-area');
-        const fileInput = document.getElementById('file-input');
-
-        dropArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropArea.classList.add('dragover');
+        document.getElementById('captureButton').addEventListener('click', function () {
+            html2canvas(document.querySelector('.result'), {
+                onrendered: function (canvas) {
+                    var customName = 'Enigmascan_Solved_WordPuzzle'; // Specify your custom image name here
+                    Canvas2Image.saveAsPNG(canvas, canvas.width, canvas.height, customName);
+                }
+            });
         });
 
-        dropArea.addEventListener('dragleave', () => {
-            dropArea.classList.remove('dragover');
-        });
-
-        dropArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropArea.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            fileInput.files = files;
-        });
-
-        dropArea.addEventListener('click', () => {
-            fileInput.click();
-        });
-      </script>
+    </script>
 </body>
+
 </html>

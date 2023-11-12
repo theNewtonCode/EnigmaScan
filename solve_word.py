@@ -56,5 +56,5 @@ class EnigmaSearch:
 #     'LMOSO',
 # ]
 # enigma_solver = EnigmaSearch()
-# enigma_solver.enigma_search(grid, 'ds')
+# print(enigma_solver.enigma_search(grid, 'ly'))
 

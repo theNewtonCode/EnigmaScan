@@ -7,6 +7,7 @@ from word_puz_ocr import WordOcr as wdo
 from solve_sudoku import SudokuSolver
 from solve_word import EnigmaSearch
 from flask_session import Session
+from crossword_solver import CrosswordSolver
 
 app = Flask(__name__)
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -215,9 +216,28 @@ def save_cropped_image():
     return jsonify({'success': True, 'new_filename': new_filename})
 
 
-@app.route('/crossword')
+@app.route('/crossword', methods=['GET', 'POST'])
 def crossword():
-    return render_template('crossword.html')
+    result = None
+    if request.method == 'POST':
+        # Get user inputs from the form
+        number_input = int(request.form['number'])
+        string1_input = list(request.form['string1'])
+        string2_input = list(request.form['string2'])
+
+        # Process the inputs and create four lists
+        result = process_input(number_input, string1_input, string2_input)
+
+    return render_template('crossword.html', result=result)
+
+def process_input(length_of_word , known_letters, known_letters_indexes):
+    know_word = ['$']*int(length_of_word)
+    solver = CrosswordSolver()
+    solver.load_wordlist('EnigmaScan/crossword_wordlist.txt')
+    for letter, index in zip(known_letters, known_letters_indexes):
+        know_word[int(index)-1] = letter.upper()
+    very_likely, likely, less_likely, least_likely = solver.search_words(length_of_word, know_word)
+    return {'list1': very_likely, 'list2': likely, 'list3': less_likely, 'list4': least_likely}
 
 
 if __name__ == '__main__':
