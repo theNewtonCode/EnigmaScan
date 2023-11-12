@@ -120,6 +120,7 @@ def wordSolve():
         success=True
         enigma_solver = EnigmaSearch()
         indexes = []
+        items = [word.strip() for word in items]
         for i in items:
             indexes.append(enigma_solver.enigma_search(matrix, i))
 
@@ -133,6 +134,8 @@ def wordSolve():
             else:
                 found_indexes.append(index)
             i+=1
+
+        print(indexes)
         return render_template('solvedWord.html', X=matrix, success=success, notfound=notfound, indexesToHighlight=found_indexes)
 
     # For the initial GET request, render the template with your initial 'X' data
