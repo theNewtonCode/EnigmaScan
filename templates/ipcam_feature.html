@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun Dark Theme Document</title>
+    <title>Capture that Puzzle</title>
     <style>
         body {
             background-color: #1a1a1a;
@@ -26,15 +26,15 @@
         .card {
             background-color: #333333;
             border-radius: 10px;
-            box-shadow: 0px 0px 40px 1px  #4CAF50;; /* Added glow shadow effect */
+            box-shadow: 0px 0px 40px 1px  #4CAF50;
             overflow: hidden;
-            width: 300px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added hover transition */
+            width: 400px; /* Adjusted width */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .card:hover {
-            transform: scale(1.05); /* Scaling effect on hover */
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), 0 12px 40px rgba(0, 0, 0, 0.25); /* Adjusted glow shadow on hover */
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), 0 12px 40px rgba(0, 0, 0, 0.25);
         }
 
         .card-header {
@@ -57,6 +57,12 @@
             border: none;
         }
 
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         button {
             background-color: #4CAF50;
             color: #ffffff;
@@ -66,6 +72,7 @@
             cursor: pointer;
             font-size: 1em;
             transition: background-color 0.3s ease;
+            margin-top: 20px; /* Added margin for spacing */
         }
 
         button:hover {
@@ -74,12 +81,13 @@
     </style>
 </head>
 <body>
-    <h1><span style="color: white;">EnigmScan:</span> Capture the puzzle</h1>
+    <h1><span style="color: white;">EnigmScan:</span> Capture that Puzzle</h1>
     <div class="card">
-        <div class="card-header">Capture the Puzzle</div>
         <div class="card-body">
-            <iframe src="http://10.12.60.98:8080/browserfs.html" frameborder="0"></iframe>
-            <button>Capture</button>
+            <form action="/camcapture" method="post">
+                <iframe src="http://10.12.60.98:8080/browserfs.html" frameborder="0"></iframe>
+                <button type="submit">Capture</button>
+            </form>
         </div>
     </div>
 </body>

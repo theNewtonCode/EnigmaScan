@@ -8,6 +8,7 @@ from solve_sudoku import SudokuSolver
 from solve_word import EnigmaSearch
 from flask_session import Session
 from crossword_solver import CrosswordSolver
+from capturepuzzle import get_image, url
 
 app = Flask(__name__)
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -34,8 +35,16 @@ def sudoku():
         if 'solve-puzzle' in request.form:
                     # If the form was submitted by the "Solve" button, redirect to x.html
             return redirect(url_for('sudokuSolve'))
+        
         if 'file' not in request.files:
             statement = "No file part"
+
+        elif 'capture-image' in request.form:
+            get_image(url)
+            success = True
+            image = 'EnigmaScan/static/uploads/puzzle.png'
+
+
         else:
             file = request.files['file']
             if file.filename == '':
@@ -175,6 +184,13 @@ def wordsearch():
             session['word_matrix'] = modified_string
 
             return redirect(url_for('wordSolve'))
+        
+        elif 'capture-image' in request.form:
+            get_image(url)
+            success = True
+            image = 'EnigmaScan/static/uploads/puzzle.png'
+
+
 
         if 'file' not in request.files:
             statement = "No file part"
