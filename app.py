@@ -218,6 +218,9 @@ def save_cropped_image():
 
     return jsonify({'success': True, 'new_filename': new_filename})
 
+@app.route('/camcapture')
+def camcapture():
+    return render_template('ipcam_feature.html')
 
 @app.route('/crossword', methods=['GET', 'POST'])
 def crossword():
