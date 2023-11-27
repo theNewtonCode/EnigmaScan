@@ -84,8 +84,8 @@ class WordOcr:
             matrixq.append(row)
         return matrixq
 
-# # Usage example:
-image_path = 'cropped_puzzle.jpg'
-sudoku_solver = WordOcr(image_path, 4, 4)
-sudoku_matrix = sudoku_solver.solve_word()
-print(sudoku_matrix)
+# # # Usage example:
+# image_path = 'cropped_puzzle.jpg'
+# sudoku_solver = WordOcr(image_path, 4, 4)
+# sudoku_matrix = sudoku_solver.solve_word()
+# print(sudoku_matrix)
